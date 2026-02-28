@@ -1,0 +1,3 @@
+# .htaccess für den config/-Ordner
+Order Deny,Allow
+Deny from all

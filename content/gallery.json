@@ -1,0 +1,25 @@
+{
+    "items": [
+        {
+            "id": "sample_1",
+            "title": "Ohne Titel I",
+            "medium": "Acryl auf Leinwand, 2024",
+            "image": "",
+            "description": "Eine Erkundung von Farbe und Raum."
+        },
+        {
+            "id": "sample_2",
+            "title": "Studie in Blau",
+            "medium": "Zeichnung, Tusche, 2023",
+            "image": "",
+            "description": "Serie von Studien über Licht und Schatten."
+        },
+        {
+            "id": "sample_3",
+            "title": "Fragmentiert",
+            "medium": "Collage, gemischte Medien, 2024",
+            "image": "",
+            "description": "Arbeit über Identität und Zersplitterung."
+        }
+    ]
+}
