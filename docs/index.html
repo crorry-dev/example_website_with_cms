@@ -2,840 +2,774 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Kunst-Website CMS — 5 Style-Vorlagen</title>
-<meta name="description" content="Open-Source CMS für Kunst-Portfolios. 5 verschiedene Style-Vorlagen zur Auswahl. PHP-basiert, anfängerfreundlich, ohne Datenbank.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kunst-Website CMS — 5 Layouts</title>
+<meta name="description" content="Open-Source CMS für Kunst-Portfolios. 5 verschiedene Layouts zum Ausprobieren.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Lato:wght@300;400;700&family=DM+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Lato:wght@300;400;700&family=DM+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ================================================================
-   RESET & BASE
-   ================================================================ */
+/* === RESET === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;font-weight:400;line-height:1.65;
-  color:#1a1a1a;background:#fff;-webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+  color:#1a1a1a;background:#fff;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;height:auto;display:block}
+img{max-width:100%;display:block}
 button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
-/* ================================================================
-   HERO
-   ================================================================ */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;text-align:center;padding:6rem 2rem 4rem;
-  background:#faf8f5;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-40%;right:-20%;width:700px;height:700px;
-  background:radial-gradient(circle,rgba(196,168,130,.12) 0%,transparent 70%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-30%;left:-15%;width:600px;height:600px;
-  background:radial-gradient(circle,rgba(196,168,130,.08) 0%,transparent 70%);pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1.2rem;
-  background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:100px;
-  font-size:.72rem;letter-spacing:.06em;color:#888;margin-bottom:2.5rem;
-  box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#c4a882}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.5rem);
-  font-weight:400;line-height:1.08;letter-spacing:-.035em;max-width:820px;
-  color:#111}
-.hero h1 em{font-style:italic;color:#a08060}
-.hero .hero-sub{font-size:clamp(1rem,1.8vw,1.2rem);color:#888;max-width:520px;
-  margin:2rem auto 0;font-weight:300;line-height:1.7}
-.hero-cta{display:flex;gap:1rem;margin-top:3rem;flex-wrap:wrap;justify-content:center}
-.btn-primary{padding:.85rem 2.2rem;background:#1a1a1a;color:#fff;border-radius:8px;
-  font-size:.82rem;letter-spacing:.04em;font-weight:500;
-  transition:all .3s ease;display:inline-flex;align-items:center;gap:.5rem}
-.btn-primary:hover{background:#333;transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.15)}
-.btn-outline{padding:.85rem 2.2rem;background:transparent;color:#1a1a1a;
-  border:1px solid rgba(0,0,0,.15);border-radius:8px;font-size:.82rem;
-  letter-spacing:.04em;font-weight:500;transition:all .3s ease;
-  display:inline-flex;align-items:center;gap:.5rem}
-.btn-outline:hover{border-color:#1a1a1a;background:rgba(0,0,0,.02)}
-.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:.6rem}
-.hero-scroll span{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;
-  color:#bbb}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,#c4a882 0%,transparent 100%);
-  animation:scrollPulse 2s ease-in-out infinite}
-@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+/* === STYLE SWITCHER (sticky top bar) === */
+.switcher{position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;gap:.35rem;
+  padding:.55rem 1rem;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  transition:background .4s,border-color .4s}
+.switcher.dark{background:rgba(12,12,14,.88);border-color:rgba(255,255,255,.06)}
+.switcher-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:#aaa;margin-right:.5rem;font-weight:500}
+.switcher.dark .switcher-label{color:#666}
+.sw-btn{padding:.4rem .9rem;font-size:.65rem;letter-spacing:.08em;font-weight:500;
+  border-radius:6px;color:#999;transition:all .25s ease;white-space:nowrap}
+.sw-btn:hover{color:#333;background:rgba(0,0,0,.04)}
+.sw-btn.active{background:#1a1a1a;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.switcher.dark .sw-btn{color:#666}
+.switcher.dark .sw-btn:hover{color:#ccc;background:rgba(255,255,255,.06)}
+.switcher.dark .sw-btn.active{background:#c4a882;color:#0c0c0e}
+.sw-gh{margin-left:.75rem;display:inline-flex;align-items:center;gap:.35rem;
+  padding:.4rem .9rem;font-size:.6rem;letter-spacing:.06em;font-weight:600;
+  border-radius:6px;background:rgba(0,0,0,.05);color:#666;transition:all .25s}
+.sw-gh:hover{background:#1a1a1a;color:#fff}
+.switcher.dark .sw-gh{background:rgba(255,255,255,.06);color:#888}
+.switcher.dark .sw-gh:hover{background:#c4a882;color:#0c0c0e}
+.sw-gh svg{width:14px;height:14px}
+
+/* === LAYOUT SECTIONS === */
+.layout{display:none;min-height:100vh;padding-top:44px}
+.layout.active{display:block}
+
+/* === SHARED UTILITY === */
+.container{max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
 
 /* ================================================================
-   SECTION SHARED
+   LAYOUT 1 — GALERIE CLASSIQUE
+   Helles Museum, Serifen, goldener Akzent, viel Weissraum
    ================================================================ */
-.section-label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.3em;
-  text-transform:uppercase;color:#b8a080;font-weight:400}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);
-  font-weight:400;line-height:1.15;letter-spacing:-.02em;margin-top:.5rem}
-.section-desc{color:#888;font-size:.95rem;line-height:1.75;max-width:480px;margin-top:1rem}
-
-/* ================================================================
-   STYLE SHOWCASE – Wrapper
-   ================================================================ */
-.showcase{padding:0}
-.style-section{position:relative;overflow:hidden}
-.style-section:nth-child(even){background:#faf8f5}
-
-/* Style Header */
-.style-header{padding:5rem 2rem 3rem;max-width:1200px;margin:0 auto;
-  display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
-.style-header .style-num{font-family:'DM Mono',monospace;font-size:clamp(5rem,10vw,8rem);
-  font-weight:300;line-height:.85;color:rgba(0,0,0,.04);letter-spacing:-.05em;
-  position:relative;top:.15em}
-.style-meta{flex:1;min-width:280px}
-.style-name{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);
-  font-weight:500;letter-spacing:-.02em;line-height:1.15}
-.style-tagline{color:#999;font-size:.85rem;margin-top:.35rem;font-weight:300}
-.style-tags{display:flex;gap:.4rem;margin-top:1rem;flex-wrap:wrap}
-.style-tag{padding:.25rem .7rem;background:rgba(0,0,0,.04);border-radius:100px;
-  font-size:.65rem;letter-spacing:.04em;color:#777}
-
-/* ================================================================
-   BROWSER FRAME – Mockup
-   ================================================================ */
-.browser-frame{max-width:1200px;margin:0 auto 5rem;padding:0 2rem}
-.browser-chrome{background:#f0eee9;border-radius:12px 12px 0 0;padding:.75rem 1rem;
-  display:flex;align-items:center;gap:.75rem;border:1px solid rgba(0,0,0,.06);border-bottom:none}
-.browser-dots{display:flex;gap:6px}
-.browser-dots span{width:10px;height:10px;border-radius:50%;
-  border:1px solid rgba(0,0,0,.08)}
-.browser-dots span:nth-child(1){background:#ff605c;border-color:#e0504c}
-.browser-dots span:nth-child(2){background:#ffbd44;border-color:#dfad3a}
-.browser-dots span:nth-child(3){background:#00ca4e;border-color:#00aa3e}
-.browser-url{flex:1;background:rgba(255,255,255,.7);border-radius:6px;padding:.3rem .8rem;
-  font-size:.68rem;color:#aaa;font-family:'DM Mono',monospace}
-.browser-body{border:1px solid rgba(0,0,0,.06);border-top:none;border-radius:0 0 12px 12px;
-  overflow:hidden;position:relative;background:#fff}
-
-/* ================================================================
-   STYLE 1 — "Galerie Classique"
-   Museale Eleganz, Creme-Töne, viel Weissraum
-   ================================================================ */
-.s1-page{background:#fdfbf7;font-family:'Cormorant Garamond',serif}
-.s1-nav{display:flex;justify-content:space-between;align-items:center;
-  padding:1.5rem 3rem;border-bottom:1px solid rgba(0,0,0,.06)}
-.s1-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;
-  font-style:italic;color:#7a6548}
-.s1-links{display:flex;gap:2rem}
-.s1-links a{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
-  color:#999;font-family:'DM Sans',sans-serif;font-weight:400;transition:color .3s}
-.s1-links a:hover{color:#1a1a1a}
-.s1-hero{display:grid;grid-template-columns:1fr 1fr;min-height:480px}
-.s1-hero-text{display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem}
-.s1-hero-text h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.12;
-  letter-spacing:-.02em;color:#1a1a1a}
-.s1-hero-text h2 em{color:#a08060;font-style:italic}
-.s1-hero-text p{font-family:'DM Sans',sans-serif;font-size:.85rem;color:#999;
-  margin-top:1.5rem;line-height:1.75;font-weight:300;max-width:360px}
-.s1-hero-text .s1-btn{display:inline-flex;align-items:center;gap:.5rem;
-  margin-top:2rem;padding:.7rem 1.8rem;border:1px solid #c4a882;color:#8b6f50;
-  font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
-  font-family:'DM Sans',sans-serif;transition:all .3s}
-.s1-hero-text .s1-btn:hover{background:#c4a882;color:#fff}
-.s1-hero-img{position:relative;overflow:hidden}
-.s1-hero-img img{width:100%;height:100%;object-fit:cover}
-.s1-gallery{padding:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.s1-gallery-item{position:relative;aspect-ratio:4/5;overflow:hidden;cursor:pointer}
-.s1-gallery-item img{width:100%;height:100%;object-fit:cover;
-  transition:transform .8s cubic-bezier(.25,.46,.45,.94)}
-.s1-gallery-item:hover img{transform:scale(1.06)}
-.s1-gallery-caption{position:absolute;bottom:0;left:0;right:0;
-  padding:2rem 1.2rem 1rem;
-  background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 100%);
-  color:#fff;opacity:0;transition:opacity .4s;transform:translateY(5px);
-  transition:all .4s ease}
-.s1-gallery-item:hover .s1-gallery-caption{opacity:1;transform:translateY(0)}
-.s1-gallery-caption h4{font-size:1rem;font-weight:400}
-.s1-gallery-caption p{font-family:'DM Sans',sans-serif;font-size:.65rem;
-  color:rgba(255,255,255,.6);margin-top:.2rem;letter-spacing:.06em}
-
-/* ================================================================
-   STYLE 2 — "Brutalist Studio"
-   Harter Kontrast, grosse Typografie, rohe Ästhetik
-   ================================================================ */
-.s2-page{background:#f0f0f0;font-family:'Space Grotesk',sans-serif;color:#111}
-.s2-nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;
-  border-bottom:2px solid #111}
-.s2-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
-  text-transform:uppercase;letter-spacing:.1em}
-.s2-links{display:flex;gap:1.5rem}
-.s2-links a{font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;
-  color:#666;font-weight:500;transition:color .2s}
-.s2-links a:hover{color:#111}
-.s2-hero{padding:3rem 2rem 2rem;position:relative}
-.s2-hero h2{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,7vw,5rem);
-  font-weight:800;line-height:.92;text-transform:uppercase;letter-spacing:-.04em}
-.s2-hero h2 span{display:block;color:#c4a882}
-.s2-hero-sub{display:flex;justify-content:space-between;align-items:flex-end;
-  margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid #111}
-.s2-hero-sub p{font-size:.75rem;color:#888;max-width:320px;line-height:1.6}
-.s2-hero-sub .s2-btn{padding:.65rem 1.5rem;background:#111;color:#fff;
-  font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;font-weight:700;
-  transition:background .3s}
-.s2-hero-sub .s2-btn:hover{background:#c4a882}
-.s2-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:2px solid #111}
-.s2-grid-item{border-right:2px solid #111;position:relative;overflow:hidden}
-.s2-grid-item:last-child{border-right:none}
-.s2-grid-item img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;
-  filter:grayscale(100%);transition:filter .5s}
-.s2-grid-item:hover img{filter:grayscale(0%)}
-.s2-grid-label{position:absolute;bottom:0;left:0;right:0;padding:1rem;
-  background:#111;color:#fff;font-size:.6rem;text-transform:uppercase;
-  letter-spacing:.2em;display:flex;justify-content:space-between;
-  transform:translateY(100%);transition:transform .3s ease}
-.s2-grid-item:hover .s2-grid-label{transform:translateY(0)}
-
-/* ================================================================
-   STYLE 3 — "Organic Flow"
-   Sanfte Erdtöne, geschwungene Formen, Aquarell-Feeling
-   ================================================================ */
-.s3-page{background:#f8f3ee;font-family:'DM Sans',sans-serif;position:relative;overflow:hidden}
-.s3-blob{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
-.s3-blob-1{width:400px;height:400px;background:radial-gradient(circle,rgba(196,168,130,.15) 0%,transparent 70%);
-  top:-100px;right:-100px}
-.s3-blob-2{width:300px;height:300px;background:radial-gradient(circle,rgba(169,140,104,.1) 0%,transparent 70%);
-  bottom:-80px;left:-60px}
-.s3-nav{display:flex;justify-content:space-between;align-items:center;
-  padding:1.5rem 3rem;position:relative;z-index:1}
-.s3-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;
-  font-style:italic;color:#8b7355}
-.s3-links{display:flex;gap:2rem}
-.s3-links a{font-size:.72rem;color:#a09080;font-weight:400;transition:color .3s;
-  letter-spacing:.05em}
-.s3-links a:hover{color:#5a4a38}
-.s3-content{position:relative;z-index:1;padding:2rem 3rem 3rem;
-  display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-.s3-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);
-  font-weight:300;line-height:1.15;color:#3a3025}
-.s3-text h2 em{color:#a08060;font-style:italic}
-.s3-text p{font-size:.82rem;color:#9a8a78;margin-top:1.2rem;line-height:1.8;font-weight:300}
-.s3-text .s3-btn{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.8rem;
-  padding:.65rem 1.6rem;background:linear-gradient(135deg,#c4a882,#a08a68);color:#fff;
-  border-radius:100px;font-size:.72rem;letter-spacing:.08em;font-weight:500;
-  transition:all .3s;box-shadow:0 4px 15px rgba(196,168,130,.25)}
-.s3-text .s3-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(196,168,130,.35)}
-.s3-img-stack{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative}
-.s3-img-stack .si{border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08)}
-.s3-img-stack .si:nth-child(2){margin-top:2rem}
-.s3-img-stack .si img{width:100%;aspect-ratio:3/4;object-fit:cover}
-.s3-features{position:relative;z-index:1;padding:2rem 3rem 3rem;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.s3-feature{background:rgba(255,255,255,.6);backdrop-filter:blur(10px);
-  border-radius:16px;padding:1.5rem;border:1px solid rgba(196,168,130,.12);
-  transition:transform .3s,box-shadow .3s}
-.s3-feature:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.06)}
-.s3-feature h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;
-  font-weight:600;color:#5a4a38;margin-bottom:.4rem}
-.s3-feature p{font-size:.72rem;color:#a09080;line-height:1.6}
-
-/* ================================================================
-   STYLE 4 — "Minimal Studio"
-   Ultra-clean, Schweizer Design, Hairline-Grids
-   ================================================================ */
-.s4-page{background:#fff;font-family:'DM Sans',sans-serif}
-.s4-nav{display:flex;justify-content:space-between;align-items:center;
-  padding:1.5rem 3rem;border-bottom:1px solid #eee}
-.s4-logo{font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-.s4-links{display:flex;gap:2rem}
-.s4-links a{font-size:.68rem;color:#aaa;letter-spacing:.1em;text-transform:uppercase;
-  font-weight:500;transition:color .2s}
-.s4-links a:hover{color:#111}
-.s4-hero{display:grid;grid-template-columns:1fr 1fr;min-height:420px;
-  border-bottom:1px solid #eee}
-.s4-hero-left{display:flex;flex-direction:column;justify-content:center;
-  padding:3rem;border-right:1px solid #eee}
-.s4-hero-left .s4-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
-  color:#ccc;margin-bottom:1rem}
-.s4-hero-left h2{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:300;line-height:1.4;color:#333}
-.s4-hero-left h2 strong{font-weight:700;color:#111}
-.s4-hero-left p{font-size:.78rem;color:#bbb;margin-top:1rem;max-width:320px;line-height:1.7}
-.s4-hero-left .s4-btn{display:inline-flex;margin-top:1.5rem;padding:.55rem 1.4rem;
-  border:1px solid #ddd;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
-  color:#666;font-weight:500;transition:all .3s}
-.s4-hero-left .s4-btn:hover{border-color:#111;color:#111}
-.s4-hero-right{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
-.s4-hero-right .s4-cell{overflow:hidden;border-bottom:1px solid #eee;border-right:1px solid #eee;
+.l1{background:#faf8f5;color:#1a1a1a;font-family:'Cormorant Garamond',serif}
+.l1-nav{display:flex;justify-content:space-between;align-items:center;
+  padding:2rem clamp(1.5rem,4vw,4rem);max-width:1280px;margin:0 auto}
+.l1-logo{font-size:1.5rem;font-weight:300;font-style:italic;color:#8b6f50;letter-spacing:.02em}
+.l1-links{display:flex;gap:clamp(1rem,3vw,2.5rem)}
+.l1-links a{font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.18em;
+  text-transform:uppercase;color:#aaa;font-weight:400;transition:color .3s;
   position:relative}
-.s4-hero-right .s4-cell:nth-child(2n){border-right:none}
-.s4-hero-right .s4-cell:nth-child(n+3){border-bottom:none}
-.s4-hero-right .s4-cell img{width:100%;height:100%;object-fit:cover;
-  transition:transform .6s ease}
-.s4-hero-right .s4-cell:hover img{transform:scale(1.05)}
-.s4-info{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #eee}
-.s4-info-item{padding:2rem;border-right:1px solid #eee;text-align:center}
-.s4-info-item:last-child{border-right:none}
-.s4-info-item .num{font-size:1.8rem;font-weight:300;color:#c4a882;
-  font-family:'Playfair Display',serif}
-.s4-info-item .txt{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;
-  color:#ccc;margin-top:.3rem}
+.l1-links a::after{content:'';position:absolute;bottom:-.35rem;left:0;width:0;height:1px;
+  background:#c4a882;transition:width .3s}
+.l1-links a:hover{color:#333}
+.l1-links a:hover::after{width:100%}
 
-/* ================================================================
-   STYLE 5 — "Dark Atelier"
-   Dunkles Kinofeeling, Gold-Akzente, dramatisch
-   ================================================================ */
-.s5-page{background:#0c0c0e;font-family:'DM Sans',sans-serif;color:#e8e4df}
-.s5-nav{display:flex;justify-content:space-between;align-items:center;
-  padding:1.5rem 3rem;border-bottom:1px solid rgba(255,255,255,.06)}
-.s5-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;
-  font-style:italic;color:#c4a882}
-.s5-links{display:flex;gap:2rem}
-.s5-links a{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
-  color:rgba(255,255,255,.3);font-weight:400;transition:color .3s}
-.s5-links a:hover{color:#c4a882}
-.s5-hero{position:relative;min-height:420px;display:flex;align-items:center;overflow:hidden}
-.s5-hero-bg{position:absolute;inset:0;z-index:0}
-.s5-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.3;
-  filter:brightness(.6)}
-.s5-hero-bg::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(to right,#0c0c0e 30%,transparent 70%)}
-.s5-hero-content{position:relative;z-index:1;padding:3rem;max-width:480px}
-.s5-hero-content .s5-label{font-family:'DM Mono',monospace;font-size:.55rem;
-  letter-spacing:.35em;text-transform:uppercase;color:#c4a882;margin-bottom:1rem}
-.s5-hero-content h2{font-family:'Playfair Display',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;line-height:1.15;
+.l1-hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 120px);
+  max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
+.l1-hero-text{display:flex;flex-direction:column;justify-content:center;
+  padding:4rem 4rem 4rem 0}
+.l1-hero-text .kicker{font-family:'DM Mono',monospace;font-size:.6rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#b8a080;margin-bottom:1.5rem}
+.l1-hero-text h1{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:300;
+  line-height:1.08;letter-spacing:-.02em}
+.l1-hero-text h1 em{font-style:italic;color:#a08060}
+.l1-hero-text p{font-family:'DM Sans',sans-serif;font-size:.92rem;color:#aaa;
+  margin-top:2rem;line-height:1.8;font-weight:300;max-width:400px}
+.l1-btn{display:inline-flex;align-items:center;gap:.6rem;
+  margin-top:2.5rem;padding:.8rem 2rem;border:1px solid #c4a882;color:#8b6f50;
+  font-family:'DM Sans',sans-serif;font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:500;transition:all .35s}
+.l1-btn:hover{background:#c4a882;color:#fff}
+.l1-hero-img{position:relative;overflow:hidden}
+.l1-hero-img img{width:100%;height:100%;object-fit:cover;
+  transition:transform 1.2s cubic-bezier(.25,.46,.45,.94)}
+.l1-hero-img:hover img{transform:scale(1.03)}
+
+.l1-section-head{text-align:center;padding:6rem 0 3rem}
+.l1-section-head .kicker{font-family:'DM Mono',monospace;font-size:.6rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#b8a080}
+.l1-section-head h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-top:.4rem;
   letter-spacing:-.02em}
-.s5-hero-content h2 em{color:#c4a882;font-style:italic}
-.s5-hero-content p{font-size:.8rem;color:rgba(255,255,255,.35);margin-top:1.2rem;
-  line-height:1.75;font-weight:300}
-.s5-hero-content .s5-btn{display:inline-flex;align-items:center;gap:.5rem;
-  margin-top:1.8rem;padding:.7rem 1.8rem;background:linear-gradient(135deg,#c4a882,#a08060);
-  color:#0c0c0e;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
-  font-weight:700;transition:all .3s;border-radius:2px}
-.s5-hero-content .s5-btn:hover{box-shadow:0 6px 30px rgba(196,168,130,.3);
-  transform:translateY(-1px)}
-.s5-gallery{display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:1px solid rgba(255,255,255,.06)}
-.s5-gallery-item{position:relative;overflow:hidden;
-  border-right:1px solid rgba(255,255,255,.06)}
-.s5-gallery-item:last-child{border-right:none}
-.s5-gallery-item img{width:100%;aspect-ratio:3/4;object-fit:cover;
-  filter:brightness(.8) saturate(.9);transition:all .6s ease}
-.s5-gallery-item:hover img{filter:brightness(1) saturate(1);transform:scale(1.04)}
-.s5-gallery-overlay{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;padding:1.2rem;
-  background:linear-gradient(to top,rgba(12,12,14,.85) 0%,transparent 50%);
+
+.l1-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  padding:0 clamp(1.5rem,4vw,4rem) 6rem;max-width:1280px;margin:0 auto}
+.l1-gal-item{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer}
+.l1-gal-item img{width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.25,.46,.45,.94)}
+.l1-gal-item:hover img{transform:scale(1.06)}
+.l1-gal-cap{position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:1.8rem;
+  background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);
+  opacity:0;transition:opacity .45s;color:#fff}
+.l1-gal-item:hover .l1-gal-cap{opacity:1}
+.l1-gal-cap h4{font-size:1.2rem;font-weight:400;letter-spacing:.01em}
+.l1-gal-cap p{font-family:'DM Sans',sans-serif;font-size:.65rem;
+  color:rgba(255,255,255,.55);margin-top:.25rem;letter-spacing:.06em}
+
+.l1-about{display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem) 6rem;align-items:center}
+.l1-about-img{aspect-ratio:4/5;overflow:hidden}
+.l1-about-img img{width:100%;height:100%;object-fit:cover}
+.l1-about-text .kicker{font-family:'DM Mono',monospace;font-size:.6rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#b8a080;margin-bottom:1rem}
+.l1-about-text h3{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;margin-bottom:1.5rem;
+  line-height:1.2}
+.l1-about-text p{font-family:'DM Sans',sans-serif;font-size:.88rem;color:#999;
+  line-height:1.85;font-weight:300}
+.l1-about-text blockquote{margin-top:2rem;padding-left:1.5rem;
+  border-left:2px solid #c4a882;font-style:italic;color:#aaa;font-size:1.05rem;
+  line-height:1.6}
+
+.l1-footer{border-top:1px solid rgba(0,0,0,.06);padding:2.5rem clamp(1.5rem,4vw,4rem);
+  max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;
+  align-items:center;font-family:'DM Sans',sans-serif;font-size:.72rem;color:#ccc}
+
+/* ================================================================
+   LAYOUT 2 — BRUTALIST STUDIO
+   Schwarz-Weiss, fette Typo, harte Kanten, Grid-Linien
+   ================================================================ */
+.l2{background:#ebebeb;color:#111;font-family:'Space Grotesk',sans-serif}
+.l2-nav{display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2rem;border-bottom:3px solid #111}
+.l2-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;
+  text-transform:uppercase;letter-spacing:.08em}
+.l2-links{display:flex;gap:1.5rem}
+.l2-links a{font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;
+  font-weight:600;color:#888;transition:color .2s}
+.l2-links a:hover{color:#111}
+
+.l2-hero{padding:clamp(3rem,8vw,6rem) 2rem 3rem;position:relative}
+.l2-hero h1{font-family:'Syne',sans-serif;font-size:clamp(3.5rem,12vw,9rem);
+  font-weight:800;line-height:.88;text-transform:uppercase;letter-spacing:-.05em}
+.l2-hero h1 .accent{color:#c4a882;display:block}
+.l2-hero-row{display:flex;justify-content:space-between;align-items:flex-end;
+  margin-top:2rem;padding-top:2rem;border-top:3px solid #111;gap:2rem;flex-wrap:wrap}
+.l2-hero-row p{font-size:.78rem;color:#888;max-width:380px;line-height:1.65}
+.l2-hero-btn{padding:.7rem 1.8rem;background:#111;color:#fff;
+  font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;font-weight:700;
+  transition:all .25s}
+.l2-hero-btn:hover{background:#c4a882;color:#111}
+
+.l2-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:3px solid #111}
+.l2-grid-item{border-right:3px solid #111;position:relative;overflow:hidden}
+.l2-grid-item:last-child{border-right:none}
+.l2-grid-item img{width:100%;aspect-ratio:2/3;object-fit:cover;
+  filter:grayscale(100%) contrast(1.1);transition:filter .5s}
+.l2-grid-item:hover img{filter:grayscale(0%) contrast(1)}
+.l2-grid-meta{position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;
+  background:#111;color:#fff;font-size:.55rem;text-transform:uppercase;
+  letter-spacing:.2em;display:flex;justify-content:space-between;
+  transform:translateY(100%);transition:transform .25s ease}
+.l2-grid-item:hover .l2-grid-meta{transform:translateY(0)}
+
+.l2-manifesto{padding:clamp(4rem,8vw,7rem) 2rem;
+  border-top:3px solid #111;border-bottom:3px solid #111}
+.l2-manifesto blockquote{font-family:'Syne',sans-serif;
+  font-size:clamp(1.6rem,4vw,3rem);font-weight:700;line-height:1.2;
+  max-width:800px;text-transform:uppercase}
+.l2-manifesto blockquote span{color:#c4a882}
+.l2-manifesto cite{display:block;margin-top:1.5rem;font-size:.7rem;
+  font-style:normal;letter-spacing:.15em;text-transform:uppercase;color:#888}
+
+.l2-info{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:3px solid #111}
+.l2-info-item{padding:2rem;border-right:3px solid #111;text-align:center}
+.l2-info-item:last-child{border-right:none}
+.l2-info-item .num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800}
+.l2-info-item .label{font-size:.55rem;text-transform:uppercase;letter-spacing:.2em;
+  color:#888;margin-top:.25rem}
+
+.l2-footer{padding:1.5rem 2rem;font-size:.6rem;text-transform:uppercase;
+  letter-spacing:.15em;color:#888;display:flex;justify-content:space-between}
+
+/* ================================================================
+   LAYOUT 3 — ORGANIC FLOW
+   Warme Erdtöne, organische Formen, abgerundete Karten
+   ================================================================ */
+.l3{background:#f6f1ea;color:#3a3025;font-family:'DM Sans',sans-serif}
+.l3-nav{display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem clamp(1.5rem,4vw,3.5rem)}
+.l3-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  font-weight:300;font-style:italic;color:#8b7355}
+.l3-links{display:flex;gap:2rem}
+.l3-links a{font-size:.72rem;color:#a09080;font-weight:400;
+  transition:color .3s;letter-spacing:.04em}
+.l3-links a:hover{color:#5a4a38}
+
+.l3-hero{display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(2rem,4vw,4rem);align-items:center;
+  padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem);
+  position:relative;overflow:hidden}
+.l3-hero::before{content:'';position:absolute;top:-15%;right:-8%;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,168,130,.14) 0%,transparent 70%);
+  pointer-events:none}
+.l3-hero::after{content:'';position:absolute;bottom:-20%;left:-10%;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(169,140,104,.08) 0%,transparent 70%);
+  pointer-events:none}
+.l3-hero-text{position:relative;z-index:1}
+.l3-hero-text h1{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.12}
+.l3-hero-text h1 em{color:#a08060;font-style:italic}
+.l3-hero-text p{font-size:.88rem;color:#9a8a78;margin-top:1.5rem;
+  line-height:1.85;font-weight:300;max-width:420px}
+.l3-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;
+  padding:.7rem 1.8rem;background:linear-gradient(135deg,#c4a882,#a08a68);color:#fff;
+  border-radius:100px;font-size:.72rem;letter-spacing:.06em;font-weight:500;
+  transition:all .35s;box-shadow:0 4px 18px rgba(196,168,130,.25)}
+.l3-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,168,130,.35)}
+.l3-hero-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative;z-index:1}
+.l3-hero-imgs .img-card{border-radius:20px;overflow:hidden;
+  box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.l3-hero-imgs .img-card:nth-child(2){margin-top:2.5rem}
+.l3-hero-imgs .img-card img{width:100%;aspect-ratio:3/4;object-fit:cover;
+  transition:transform .8s ease}
+.l3-hero-imgs .img-card:hover img{transform:scale(1.04)}
+
+.l3-features{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;padding:0 clamp(1.5rem,4vw,3.5rem) clamp(3rem,6vw,5rem)}
+.l3-feat{background:rgba(255,255,255,.65);backdrop-filter:blur(10px);
+  border-radius:20px;padding:2rem;border:1px solid rgba(196,168,130,.1);
+  transition:transform .3s,box-shadow .3s}
+.l3-feat:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.06)}
+.l3-feat h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;
+  font-weight:600;color:#5a4a38;margin-bottom:.6rem}
+.l3-feat p{font-size:.78rem;color:#a09080;line-height:1.7}
+
+.l3-gallery-head{text-align:center;padding:4rem 0 2.5rem}
+.l3-gallery-head .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#b8a080}
+.l3-gallery-head h2{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;margin-top:.4rem}
+
+.l3-masonry{column-count:3;column-gap:1.2rem;
+  padding:0 clamp(1.5rem,4vw,3.5rem) 5rem}
+.l3-masonry .m-item{break-inside:avoid;margin-bottom:1.2rem;border-radius:16px;
+  overflow:hidden;position:relative;cursor:pointer;
+  box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.l3-masonry .m-item img{width:100%;display:block;
+  transition:transform .7s ease}
+.l3-masonry .m-item:hover img{transform:scale(1.04)}
+.l3-m-cap{position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:1.4rem;
+  background:linear-gradient(to top,rgba(58,48,37,.7) 0%,transparent 50%);
+  opacity:0;transition:opacity .35s;color:#fff}
+.l3-masonry .m-item:hover .l3-m-cap{opacity:1}
+.l3-m-cap h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400}
+.l3-m-cap p{font-size:.6rem;color:rgba(255,255,255,.55);margin-top:.15rem;letter-spacing:.05em}
+
+.l3-footer{border-top:1px solid rgba(0,0,0,.06);
+  padding:2rem clamp(1.5rem,4vw,3.5rem);text-align:center;
+  font-size:.72rem;color:#bbb}
+
+/* ================================================================
+   LAYOUT 4 — MINIMAL GRID
+   Weiss, Hairline-Borders, Schweizer Raster, nüchterne Eleganz
+   ================================================================ */
+.l4{background:#fff;color:#111;font-family:'Inter',sans-serif}
+.l4-nav{display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem clamp(1.5rem,4vw,3.5rem);border-bottom:1px solid #eee}
+.l4-logo{font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.l4-links{display:flex;gap:2rem}
+.l4-links a{font-size:.62rem;color:#bbb;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:500;transition:color .2s}
+.l4-links a:hover{color:#111}
+
+.l4-hero{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #eee}
+.l4-hero-left{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem);
+  border-right:1px solid #eee}
+.l4-hero-left .l4-label{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#ccc;margin-bottom:1.2rem;font-weight:500}
+.l4-hero-left h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;
+  line-height:1.45;color:#333}
+.l4-hero-left h1 strong{font-weight:600;color:#111}
+.l4-hero-left p{font-size:.78rem;color:#bbb;margin-top:1rem;
+  max-width:380px;line-height:1.7}
+.l4-outline-btn{display:inline-flex;margin-top:1.5rem;padding:.55rem 1.4rem;
+  border:1px solid #ddd;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:#888;font-weight:500;transition:all .3s}
+.l4-outline-btn:hover{border-color:#111;color:#111}
+.l4-hero-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.l4-hero-grid .cell{overflow:hidden;border-bottom:1px solid #eee;
+  border-right:1px solid #eee;position:relative}
+.l4-hero-grid .cell:nth-child(2n){border-right:none}
+.l4-hero-grid .cell:nth-child(n+3){border-bottom:none}
+.l4-hero-grid .cell img{width:100%;height:100%;object-fit:cover;
+  aspect-ratio:1;transition:transform .6s ease}
+.l4-hero-grid .cell:hover img{transform:scale(1.05)}
+
+.l4-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #eee}
+.l4-stat{padding:2.5rem;border-right:1px solid #eee;text-align:center;
+  transition:background .3s}
+.l4-stat:last-child{border-right:none}
+.l4-stat:hover{background:#faf8f5}
+.l4-stat .num{font-size:2.2rem;font-weight:300;color:#c4a882;
+  font-family:'Playfair Display',serif}
+.l4-stat .txt{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
+  color:#ccc;margin-top:.35rem;font-weight:500}
+
+.l4-work{padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem)}
+.l4-work-head{display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #eee}
+.l4-work-head h2{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:300;color:#333}
+.l4-work-head span{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
+  color:#ccc;font-weight:500}
+.l4-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:#eee;border:1px solid #eee}
+.l4-work-cell{background:#fff;position:relative;overflow:hidden;aspect-ratio:3/4}
+.l4-work-cell img{width:100%;height:100%;object-fit:cover;
+  transition:transform .7s ease}
+.l4-work-cell:hover img{transform:scale(1.05)}
+.l4-work-overlay{position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:1.2rem;opacity:0;transition:opacity .3s;
+  background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);color:#fff}
+.l4-work-cell:hover .l4-work-overlay{opacity:1}
+.l4-work-overlay h4{font-size:.82rem;font-weight:500}
+.l4-work-overlay p{font-size:.55rem;color:rgba(255,255,255,.5);margin-top:.1rem;
+  letter-spacing:.06em}
+
+.l4-footer{border-top:1px solid #eee;padding:2rem clamp(1.5rem,4vw,3.5rem);
+  display:flex;justify-content:space-between;font-size:.62rem;color:#ccc;
+  letter-spacing:.06em}
+
+/* ================================================================
+   LAYOUT 5 — DARK ATELIER
+   Dunkler Kinofilm-Look, Gold-Akzente, dramatische Tiefe
+   ================================================================ */
+.l5{background:#0c0c0e;color:#e8e4df;font-family:'DM Sans',sans-serif}
+.l5-nav{display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem clamp(1.5rem,4vw,3.5rem);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.l5-logo{font-family:'Playfair Display',serif;font-size:1.2rem;
+  font-weight:400;font-style:italic;color:#c4a882}
+.l5-links{display:flex;gap:2rem}
+.l5-links a{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);font-weight:400;transition:color .3s}
+.l5-links a:hover{color:#c4a882}
+
+.l5-hero{position:relative;min-height:calc(100vh - 100px);
+  display:flex;align-items:center;overflow:hidden}
+.l5-hero-bg{position:absolute;inset:0;z-index:0}
+.l5-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.25;filter:brightness(.5)}
+.l5-hero-bg::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,#0c0c0e 35%,transparent 75%)}
+.l5-hero-content{position:relative;z-index:1;
+  padding:clamp(3rem,8vw,6rem) clamp(1.5rem,4vw,3.5rem);max-width:580px}
+.l5-hero-content .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
+  letter-spacing:.4em;text-transform:uppercase;color:#c4a882;margin-bottom:1.5rem}
+.l5-hero-content h1{font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:400;line-height:1.1;
+  letter-spacing:-.02em}
+.l5-hero-content h1 em{color:#c4a882;font-style:italic}
+.l5-hero-content p{font-size:.85rem;color:rgba(255,255,255,.3);
+  margin-top:1.5rem;line-height:1.8;font-weight:300}
+.l5-gold-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;
+  padding:.75rem 2rem;background:linear-gradient(135deg,#c4a882,#a08060);
+  color:#0c0c0e;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;transition:all .35s}
+.l5-gold-btn:hover{box-shadow:0 8px 35px rgba(196,168,130,.3);
+  transform:translateY(-2px)}
+
+.l5-gallery{display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(255,255,255,.05)}
+.l5-gal-item{position:relative;overflow:hidden;
+  border-right:1px solid rgba(255,255,255,.05)}
+.l5-gal-item:last-child{border-right:none}
+.l5-gal-item img{width:100%;aspect-ratio:3/4;object-fit:cover;
+  filter:brightness(.75) saturate(.85);transition:all .6s ease}
+.l5-gal-item:hover img{filter:brightness(1) saturate(1);transform:scale(1.04)}
+.l5-gal-over{position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:1.4rem;
+  background:linear-gradient(to top,rgba(12,12,14,.85) 0%,transparent 45%);
   opacity:0;transition:opacity .4s}
-.s5-gallery-item:hover .s5-gallery-overlay{opacity:1}
-.s5-gallery-overlay h4{font-family:'Playfair Display',serif;font-size:.9rem;
-  font-weight:400;color:#e8e4df}
-.s5-gallery-overlay p{font-size:.6rem;color:#c4a882;letter-spacing:.1em;
-  margin-top:.15rem}
+.l5-gal-item:hover .l5-gal-over{opacity:1}
+.l5-gal-over h4{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:400}
+.l5-gal-over p{font-size:.58rem;color:#c4a882;letter-spacing:.12em;margin-top:.15rem}
+
+.l5-about{display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid rgba(255,255,255,.05)}
+.l5-about-img{overflow:hidden}
+.l5-about-img img{width:100%;height:100%;object-fit:cover;
+  filter:brightness(.8);min-height:400px}
+.l5-about-text{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(2rem,5vw,4rem)}
+.l5-about-text .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#c4a882;margin-bottom:1rem}
+.l5-about-text h3{font-family:'Playfair Display',serif;
+  font-size:clamp(1.5rem,3vw,2.2rem);font-weight:400;margin-bottom:1.2rem;
+  line-height:1.2}
+.l5-about-text p{font-size:.82rem;color:rgba(255,255,255,.3);line-height:1.8;font-weight:300}
+.l5-about-text blockquote{margin-top:1.5rem;padding-left:1.2rem;
+  border-left:2px solid #c4a882;font-family:'Playfair Display',serif;
+  font-style:italic;color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.5}
+
+.l5-footer{border-top:1px solid rgba(255,255,255,.05);
+  padding:2rem clamp(1.5rem,4vw,3.5rem);display:flex;justify-content:space-between;
+  font-size:.62rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
 
 /* ================================================================
-   CMS FEATURES
+   CTA BANNER (fixed bottom, shows on all layouts)
    ================================================================ */
-.features{padding:7rem 2rem;background:#fff}
-.features-inner{max-width:1000px;margin:0 auto;text-align:center}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:3.5rem}
-.feature-card{text-align:left;padding:2rem;border:1px solid rgba(0,0,0,.06);
-  border-radius:12px;transition:all .3s}
-.feature-card:hover{border-color:rgba(196,168,130,.3);
-  box-shadow:0 8px 30px rgba(0,0,0,.04);transform:translateY(-4px)}
-.feature-icon{width:40px;height:40px;border-radius:10px;
-  background:rgba(196,168,130,.08);display:flex;align-items:center;justify-content:center;
-  margin-bottom:1.2rem}
-.feature-icon svg{width:20px;height:20px;stroke:#a08060;fill:none;stroke-width:1.5;
-  stroke-linecap:round;stroke-linejoin:round}
-.feature-card h4{font-family:'Playfair Display',serif;font-size:1.05rem;
-  font-weight:500;margin-bottom:.5rem}
-.feature-card p{font-size:.8rem;color:#999;line-height:1.65}
-
-/* ================================================================
-   CTA
-   ================================================================ */
-.cta{padding:7rem 2rem;background:#faf8f5;text-align:center}
-.cta-inner{max-width:600px;margin:0 auto}
-.cta h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);
-  font-weight:400;line-height:1.15;letter-spacing:-.02em}
-.cta h2 em{color:#a08060;font-style:italic}
-.cta p{color:#999;margin-top:1rem;font-size:.95rem;line-height:1.7}
-.cta .btn-primary{margin-top:2rem}
-
-/* ================================================================
-   FOOTER
-   ================================================================ */
-.site-footer{padding:3rem 2rem;background:#1a1a1a;color:rgba(255,255,255,.3);
-  text-align:center;font-size:.75rem}
-.site-footer a{color:#c4a882;transition:color .3s}
-.site-footer a:hover{color:#e0c8a8}
-
-/* ================================================================
-   SCROLL REVEAL
-   ================================================================ */
-.sr{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.sr.vis{opacity:1;transform:translateY(0)}
-.sr-d1{transition-delay:.1s}.sr-d2{transition-delay:.2s}
-.sr-d3{transition-delay:.3s}.sr-d4{transition-delay:.4s}
+.cta-bar{position:fixed;bottom:0;left:0;right:0;z-index:9998;
+  padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;
+  background:rgba(26,26,26,.92);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-top:1px solid rgba(255,255,255,.06);
+  transform:translateY(100%);transition:transform .5s cubic-bezier(.25,.46,.45,.94);
+  flex-wrap:wrap}
+.cta-bar.show{transform:translateY(0)}
+.cta-bar p{font-size:.72rem;color:rgba(255,255,255,.5);font-weight:300}
+.cta-bar p strong{color:#fff;font-weight:500}
+.cta-bar a{padding:.45rem 1.3rem;background:#c4a882;color:#0c0c0e;
+  font-size:.62rem;letter-spacing:.08em;font-weight:600;border-radius:6px;
+  transition:all .25s;flex-shrink:0}
+.cta-bar a:hover{background:#e0c8a8;transform:translateY(-1px)}
+.cta-close{color:rgba(255,255,255,.3);font-size:1rem;padding:.2rem .4rem;
+  transition:color .2s;flex-shrink:0}
+.cta-close:hover{color:#fff}
 
 /* ================================================================
    RESPONSIVE
    ================================================================ */
 @media(max-width:900px){
-  .s1-hero,.s3-content,.s4-hero{grid-template-columns:1fr}
-  .s1-hero-img{max-height:280px}
-  .s1-gallery{grid-template-columns:1fr 1fr}
-  .s2-grid{grid-template-columns:1fr 1fr}
-  .s2-grid-item:nth-child(3){border-right:none;border-top:2px solid #111;grid-column:span 2}
-  .s3-img-stack{grid-template-columns:1fr}
-  .s3-img-stack .si:nth-child(2){margin-top:0}
-  .s3-features{grid-template-columns:1fr}
-  .s4-hero-left{border-right:none;border-bottom:1px solid #eee}
-  .s4-hero-right{grid-template-columns:1fr 1fr}
-  .s4-info{grid-template-columns:1fr 1fr}
-  .s4-info-item:nth-child(2){border-right:none}
-  .s4-info-item:nth-child(3){border-right:1px solid #eee}
-  .s5-gallery{grid-template-columns:1fr 1fr}
-  .s5-gallery-item:nth-child(2){border-right:none}
-  .s5-gallery-item:nth-child(3){border-right:1px solid rgba(255,255,255,.06)}
-  .features-grid{grid-template-columns:1fr}
-  .style-header{flex-direction:column;align-items:flex-start}
+  .l1-hero,.l1-about,.l3-hero,.l4-hero,.l5-about{grid-template-columns:1fr}
+  .l1-hero-text{padding:3rem 0 2rem}
+  .l1-hero-img{max-height:50vh}
+  .l1-gallery{grid-template-columns:1fr 1fr}
+  .l2-grid{grid-template-columns:1fr 1fr}
+  .l2-grid-item:last-child{grid-column:span 2;border-top:3px solid #111}
+  .l2-info{grid-template-columns:1fr 1fr}
+  .l2-info-item:nth-child(2){border-right:none}
+  .l2-info-item:nth-child(3){border-right:3px solid #111}
+  .l3-hero-imgs{grid-template-columns:1fr}
+  .l3-hero-imgs .img-card:nth-child(2){margin-top:0}
+  .l3-features{grid-template-columns:1fr}
+  .l3-masonry{column-count:2}
+  .l4-hero-left{border-right:none;border-bottom:1px solid #eee}
+  .l4-stats{grid-template-columns:1fr 1fr}
+  .l4-stat:nth-child(2){border-right:none}
+  .l4-stat:nth-child(3){border-right:1px solid #eee}
+  .l4-work-grid{grid-template-columns:1fr 1fr}
+  .l5-gallery{grid-template-columns:1fr 1fr}
+  .l5-gal-item:nth-child(2){border-right:none}
+  .l5-gal-item:nth-child(3){border-right:1px solid rgba(255,255,255,.05)}
+  .switcher{gap:.15rem;padding:.5rem .6rem;flex-wrap:wrap}
+  .switcher-label{display:none}
+  .sw-btn{padding:.35rem .55rem;font-size:.55rem}
 }
 @media(max-width:600px){
-  .s1-gallery{grid-template-columns:1fr}
-  .s1-nav,.s2-nav,.s3-nav,.s4-nav,.s5-nav{padding:1rem 1.5rem}
-  .s1-links,.s2-links,.s3-links,.s4-links,.s5-links{display:none}
-  .s1-hero-text,.s3-content,.s3-features,.s4-hero-left{padding:2rem 1.5rem}
-  .s2-hero{padding:2rem 1.5rem}
-  .s2-grid{grid-template-columns:1fr}
-  .s2-grid-item{border-right:none;border-bottom:2px solid #111}
-  .s2-grid-item:nth-child(3){grid-column:span 1}
-  .s4-info{grid-template-columns:1fr 1fr}
-  .s5-gallery{grid-template-columns:1fr}
-  .s5-gallery-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
+  .l1-gallery{grid-template-columns:1fr}
+  .l2-grid{grid-template-columns:1fr}
+  .l2-grid-item{border-right:none;border-bottom:3px solid #111}
+  .l2-grid-item:last-child{grid-column:span 1;border-bottom:none}
+  .l3-masonry{column-count:1}
+  .l4-hero-grid{grid-template-columns:1fr}
+  .l4-hero-grid .cell{border-right:none;border-bottom:1px solid #eee}
+  .l4-hero-grid .cell:last-child{border-bottom:none}
+  .l4-work-grid{grid-template-columns:1fr}
+  .l4-stats{grid-template-columns:1fr 1fr}
+  .l5-gallery{grid-template-columns:1fr}
+  .l5-gal-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
+  .l5-gal-item:last-child{border-bottom:none}
+  .l1-links,.l2-links,.l3-links,.l4-links,.l5-links{display:none}
 }
 </style>
 </head>
 <body>
 
 <!-- ============================================================
-     HERO
+     STYLE SWITCHER
      ============================================================ -->
-<section class="hero">
-  <div class="hero-badge"><span class="dot"></span> Open Source &middot; PHP &middot; Kein Framework</div>
-  <h1>Dein Kunst-Portfolio.<br><em>Fünf Visionen.</em></h1>
-  <p class="hero-sub">Ein CMS für Künstler, Studierende und Kreative. Wähle deinen Stil, lade es auf deinen Server – fertig.</p>
-  <div class="hero-cta">
-    <a href="https://github.com/crorry-dev/example_website_with_cms" class="btn-primary" target="_blank">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      Quellcode ansehen
-    </a>
-    <a href="#style1" class="btn-outline">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      Styles entdecken
-    </a>
-  </div>
-  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
-</section>
+<nav class="switcher" id="switcher">
+  <span class="switcher-label">Layout:</span>
+  <button class="sw-btn active" data-layout="l1">Classique</button>
+  <button class="sw-btn" data-layout="l2">Brutalist</button>
+  <button class="sw-btn" data-layout="l3">Organic</button>
+  <button class="sw-btn" data-layout="l4">Minimal</button>
+  <button class="sw-btn" data-layout="l5">Dark</button>
+  <a class="sw-gh" href="https://github.com/crorry-dev/example_website_with_cms" target="_blank">
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    GitHub
+  </a>
+</nav>
 
 
 <!-- ============================================================
-     STYLE 1 — Galerie Classique
+     LAYOUT 1 — GALERIE CLASSIQUE
      ============================================================ -->
-<div class="showcase">
-
-<section class="style-section" id="style1">
-  <div class="style-header">
-    <div class="style-num sr">01</div>
-    <div class="style-meta">
-      <h3 class="style-name sr sr-d1">Galerie Classique</h3>
-      <p class="style-tagline sr sr-d2">Museale Eleganz mit Weissraum und Serifen-Typografie</p>
-      <div class="style-tags sr sr-d3">
-        <span class="style-tag">Museum</span>
-        <span class="style-tag">Serifen</span>
-        <span class="style-tag">Creme-Töne</span>
-        <span class="style-tag">Klassisch</span>
-      </div>
+<div class="layout l1 active" id="l1">
+  <nav class="l1-nav">
+    <div class="l1-logo">Lena Müller</div>
+    <div class="l1-links">
+      <a href="#">Portfolio</a><a href="#">Über mich</a><a href="#">Vita</a><a href="#">Kontakt</a>
+    </div>
+  </nav>
+  <div class="l1-hero">
+    <div class="l1-hero-text">
+      <div class="kicker">Freie Kunst &middot; Weimar</div>
+      <h1>Wo die<br><em>Stille</em><br>sichtbar wird.</h1>
+      <p>Arbeiten in Öl, Acryl und Mixed Media. Studium der Freien Kunst an der Bauhaus-Universität Weimar.</p>
+      <a href="#" class="l1-btn">Portfolio ansehen &rarr;</a>
+    </div>
+    <div class="l1-hero-img">
+      <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&h=1100&fit=crop&q=80" alt="Kunst" loading="lazy">
     </div>
   </div>
-  <div class="browser-frame sr">
-    <div class="browser-chrome">
-      <div class="browser-dots"><span></span><span></span><span></span></div>
-      <div class="browser-url">lena-mueller-kunst.de</div>
+  <div class="l1-section-head"><div class="kicker">Ausgewählte Werke</div><h2>Portfolio</h2></div>
+  <div class="l1-gallery">
+    <div class="l1-gal-item">
+      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=800&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l1-gal-cap"><h4>Fragmente der Stille</h4><p>Öl auf Leinwand &middot; 120 &times; 80 cm</p></div>
     </div>
-    <div class="browser-body">
-      <div class="s1-page">
-        <nav class="s1-nav">
-          <div class="s1-logo">Lena Müller</div>
-          <div class="s1-links">
-            <a href="#">Portfolio</a>
-            <a href="#">Über mich</a>
-            <a href="#">Vita</a>
-            <a href="#">Kontakt</a>
-          </div>
-        </nav>
-        <div class="s1-hero">
-          <div class="s1-hero-text">
-            <h2>Wo die <em>Stille</em><br>sichtbar wird.</h2>
-            <p>Arbeiten in Öl, Acryl und Mixed Media. Studium der Freien Kunst an der Bauhaus-Universität Weimar.</p>
-            <a href="#" class="s1-btn">Portfolio ansehen &rarr;</a>
-          </div>
-          <div class="s1-hero-img">
-            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&h=600&fit=crop&q=80" alt="Kunst" loading="lazy">
-          </div>
-        </div>
-        <div class="s1-gallery">
-          <div class="s1-gallery-item">
-            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=500&fit=crop&q=80" alt="Werk 1" loading="lazy">
-            <div class="s1-gallery-caption"><h4>Fragmente der Stille</h4><p>Öl auf Leinwand &middot; 120 &times; 80 cm</p></div>
-          </div>
-          <div class="s1-gallery-item">
-            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=500&fit=crop&q=80" alt="Werk 2" loading="lazy">
-            <div class="s1-gallery-caption"><h4>Urbane Reflexionen</h4><p>Acryl &amp; Mixed Media</p></div>
-          </div>
-          <div class="s1-gallery-item">
-            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=400&h=500&fit=crop&q=80" alt="Werk 3" loading="lazy">
-            <div class="s1-gallery-caption"><h4>Lichtstudie III</h4><p>Aquarell auf Papier</p></div>
-          </div>
-        </div>
-      </div>
+    <div class="l1-gal-item">
+      <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=800&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l1-gal-cap"><h4>Urbane Reflexionen</h4><p>Acryl &amp; Mixed Media</p></div>
+    </div>
+    <div class="l1-gal-item">
+      <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=800&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l1-gal-cap"><h4>Lichtstudie III</h4><p>Aquarell auf Papier</p></div>
     </div>
   </div>
-</section>
+  <div class="l1-about">
+    <div class="l1-about-img">
+      <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&h=900&fit=crop&q=80" alt="" loading="lazy">
+    </div>
+    <div class="l1-about-text">
+      <div class="kicker">Über mich</div>
+      <h3>Kunst als Prozess des Verstehens.</h3>
+      <p>Ich studiere Freie Kunst an der Bauhaus-Universität Weimar. Meine Praxis bewegt sich an der Schnittstelle von Malerei, Installation und digitaler Kunst.</p>
+      <blockquote>„Kunst ist für mich kein Produkt, sondern ein Prozess des Verstehens."</blockquote>
+    </div>
+  </div>
+  <footer class="l1-footer"><span>&copy; 2025 Lena Müller</span><span>Impressum &middot; Datenschutz</span></footer>
+</div>
 
 
 <!-- ============================================================
-     STYLE 2 — Brutalist Studio
+     LAYOUT 2 — BRUTALIST STUDIO
      ============================================================ -->
-<section class="style-section" id="style2">
-  <div class="style-header">
-    <div class="style-num sr">02</div>
-    <div class="style-meta">
-      <h3 class="style-name sr sr-d1">Brutalist Studio</h3>
-      <p class="style-tagline sr sr-d2">Harter Kontrast, grosse Typografie, kompromisslos roh</p>
-      <div class="style-tags sr sr-d3">
-        <span class="style-tag">Brutalism</span>
-        <span class="style-tag">Sans-Serif</span>
-        <span class="style-tag">Schwarz-Weiss</span>
-        <span class="style-tag">Roh</span>
-      </div>
+<div class="layout l2" id="l2">
+  <nav class="l2-nav">
+    <div class="l2-logo">L.M. Studio</div>
+    <div class="l2-links"><a href="#">Arbeiten</a><a href="#">Info</a><a href="#">Kontakt</a></div>
+  </nav>
+  <div class="l2-hero">
+    <h1>Lena<br>Müller<br><span class="accent">Studio</span></h1>
+    <div class="l2-hero-row">
+      <p>Malerei, Installation und digitale Arbeiten. Bauhaus-Universität Weimar, 2022 &ndash; heute.</p>
+      <a href="#" class="l2-hero-btn">Alle Arbeiten ansehen</a>
     </div>
   </div>
-  <div class="browser-frame sr">
-    <div class="browser-chrome">
-      <div class="browser-dots"><span></span><span></span><span></span></div>
-      <div class="browser-url">lena-mueller-kunst.de</div>
+  <div class="l2-grid">
+    <div class="l2-grid-item">
+      <img src="https://images.unsplash.com/photo-1531913764164-f85c3e01b2aa?w=600&h=900&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l2-grid-meta"><span>Fragmente</span><span>2024</span></div>
     </div>
-    <div class="browser-body">
-      <div class="s2-page">
-        <nav class="s2-nav">
-          <div class="s2-logo">L.M. STUDIO</div>
-          <div class="s2-links">
-            <a href="#">Arbeiten</a>
-            <a href="#">Info</a>
-            <a href="#">Kontakt</a>
-          </div>
-        </nav>
-        <div class="s2-hero">
-          <h2>Lena<br>Müller<br><span>Studio</span></h2>
-          <div class="s2-hero-sub">
-            <p>Malerei, Installation und digitale Arbeiten. Bauhaus-Universität Weimar, 2022–heute.</p>
-            <a href="#" class="s2-btn">Alle Arbeiten</a>
-          </div>
-        </div>
-        <div class="s2-grid">
-          <div class="s2-grid-item">
-            <img src="https://images.unsplash.com/photo-1531913764164-f85c3e01b2aa?w=500&h=660&fit=crop&q=80" alt="Werk" loading="lazy">
-            <div class="s2-grid-label"><span>Fragmente</span><span>2024</span></div>
-          </div>
-          <div class="s2-grid-item">
-            <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=500&h=660&fit=crop&q=80" alt="Werk" loading="lazy">
-            <div class="s2-grid-label"><span>Abstraktion VII</span><span>2025</span></div>
-          </div>
-          <div class="s2-grid-item">
-            <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=500&h=660&fit=crop&q=80" alt="Werk" loading="lazy">
-            <div class="s2-grid-label"><span>Horizont</span><span>2025</span></div>
-          </div>
-        </div>
-      </div>
+    <div class="l2-grid-item">
+      <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=600&h=900&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l2-grid-meta"><span>Abstraktion VII</span><span>2025</span></div>
+    </div>
+    <div class="l2-grid-item">
+      <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=600&h=900&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l2-grid-meta"><span>Horizont</span><span>2025</span></div>
     </div>
   </div>
-</section>
+  <div class="l2-manifesto">
+    <blockquote>Kunst braucht keine <span>Erklärung</span>. Sie braucht <span>Raum</span>.</blockquote>
+    <cite>Lena Müller, 2025</cite>
+  </div>
+  <div class="l2-info">
+    <div class="l2-info-item"><div class="num">24</div><div class="label">Werke</div></div>
+    <div class="l2-info-item"><div class="num">06</div><div class="label">Ausstellungen</div></div>
+    <div class="l2-info-item"><div class="num">03</div><div class="label">Stipendien</div></div>
+    <div class="l2-info-item"><div class="num">01</div><div class="label">Preis</div></div>
+  </div>
+  <footer class="l2-footer"><span>&copy; 2025 L.M. Studio</span><span>Impressum</span></footer>
+</div>
 
 
 <!-- ============================================================
-     STYLE 3 — Organic Flow
+     LAYOUT 3 — ORGANIC FLOW
      ============================================================ -->
-<section class="style-section" id="style3">
-  <div class="style-header">
-    <div class="style-num sr">03</div>
-    <div class="style-meta">
-      <h3 class="style-name sr sr-d1">Organic Flow</h3>
-      <p class="style-tagline sr sr-d2">Weiche Erdtöne, runde Formen, warme Materialität</p>
-      <div class="style-tags sr sr-d3">
-        <span class="style-tag">Organisch</span>
-        <span class="style-tag">Erdtöne</span>
-        <span class="style-tag">Rund</span>
-        <span class="style-tag">Warm</span>
-      </div>
+<div class="layout l3" id="l3">
+  <nav class="l3-nav">
+    <div class="l3-logo">Lena Müller</div>
+    <div class="l3-links"><a href="#">Arbeiten</a><a href="#">Über mich</a><a href="#">Kontakt</a></div>
+  </nav>
+  <div class="l3-hero">
+    <div class="l3-hero-text">
+      <h1>Kunst als<br><em>Prozess</em> des<br>Verstehens.</h1>
+      <p>Arbeiten an der Schnittstelle von Malerei, Installation und digitaler Kunst. Studium an der Bauhaus-Universität Weimar.</p>
+      <a href="#" class="l3-btn">Entdecken &rarr;</a>
+    </div>
+    <div class="l3-hero-imgs">
+      <div class="img-card"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&h=660&fit=crop&q=80" alt="" loading="lazy"></div>
+      <div class="img-card"><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=500&h=660&fit=crop&q=80" alt="" loading="lazy"></div>
     </div>
   </div>
-  <div class="browser-frame sr">
-    <div class="browser-chrome">
-      <div class="browser-dots"><span></span><span></span><span></span></div>
-      <div class="browser-url">lena-mueller-kunst.de</div>
-    </div>
-    <div class="browser-body">
-      <div class="s3-page">
-        <div class="s3-blob s3-blob-1"></div>
-        <div class="s3-blob s3-blob-2"></div>
-        <nav class="s3-nav">
-          <div class="s3-logo">Lena Müller</div>
-          <div class="s3-links">
-            <a href="#">Arbeiten</a>
-            <a href="#">Über mich</a>
-            <a href="#">Kontakt</a>
-          </div>
-        </nav>
-        <div class="s3-content">
-          <div class="s3-text">
-            <h2>Kunst als<br><em>Prozess</em> des<br>Verstehens.</h2>
-            <p>Arbeiten an der Schnittstelle von Malerei, Installation und digitaler Kunst. Studium an der Bauhaus-Universität Weimar.</p>
-            <a href="#" class="s3-btn">Entdecken &rarr;</a>
-          </div>
-          <div class="s3-img-stack">
-            <div class="si"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=520&fit=crop&q=80" alt="Arbeit" loading="lazy"></div>
-            <div class="si"><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400&h=520&fit=crop&q=80" alt="Arbeit" loading="lazy"></div>
-          </div>
-        </div>
-        <div class="s3-features">
-          <div class="s3-feature">
-            <h4>Malerei</h4>
-            <p>Öl und Acryl auf Leinwand, gestische Abstraktion und Farbstudien.</p>
-          </div>
-          <div class="s3-feature">
-            <h4>Installation</h4>
-            <p>Raumgreifende Arbeiten mit Licht, Stoff und gefundenen Materialien.</p>
-          </div>
-          <div class="s3-feature">
-            <h4>Digitale Kunst</h4>
-            <p>Generative Grafiken und interaktive Arbeiten an der Schnittstelle von Code und Bild.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="l3-features">
+    <div class="l3-feat"><h4>Malerei</h4><p>Öl und Acryl auf Leinwand. Gestische Abstraktion und Farbstudien mit expressivem Duktus.</p></div>
+    <div class="l3-feat"><h4>Installation</h4><p>Raumgreifende Arbeiten mit Licht, Stoff und gefundenen Materialien im Dialog mit dem Ort.</p></div>
+    <div class="l3-feat"><h4>Digitale Kunst</h4><p>Generative Grafiken und interaktive Arbeiten an der Schnittstelle von Code und Bild.</p></div>
   </div>
-</section>
+  <div class="l3-gallery-head"><div class="kicker">Ausgewählte Arbeiten</div><h2>Portfolio</h2></div>
+  <div class="l3-masonry">
+    <div class="m-item"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=700&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Fragmente</h4><p>Öl auf Leinwand</p></div></div>
+    <div class="m-item"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=500&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Reflexionen</h4><p>Acryl &amp; Mixed Media</p></div></div>
+    <div class="m-item"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&h=750&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Lichtstudie</h4><p>Aquarell</p></div></div>
+    <div class="m-item"><img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=500&h=550&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Horizont</h4><p>Mischtechnik</p></div></div>
+    <div class="m-item"><img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=500&h=680&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Materie</h4><p>Skulptur</p></div></div>
+    <div class="m-item"><img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=500&h=500&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Abstraktion</h4><p>Öl auf Leinwand</p></div></div>
+  </div>
+  <footer class="l3-footer">&copy; 2025 Lena Müller &middot; Kunst &amp; Installation</footer>
+</div>
 
 
 <!-- ============================================================
-     STYLE 4 — Minimal Studio
+     LAYOUT 4 — MINIMAL GRID
      ============================================================ -->
-<section class="style-section" id="style4">
-  <div class="style-header">
-    <div class="style-num sr">04</div>
-    <div class="style-meta">
-      <h3 class="style-name sr sr-d1">Minimal Studio</h3>
-      <p class="style-tagline sr sr-d2">Schweizer Präzision, Hairline-Grids, reduziert auf das Wesentliche</p>
-      <div class="style-tags sr sr-d3">
-        <span class="style-tag">Minimal</span>
-        <span class="style-tag">Swiss Design</span>
-        <span class="style-tag">Grid</span>
-        <span class="style-tag">Clean</span>
-      </div>
+<div class="layout l4" id="l4">
+  <nav class="l4-nav">
+    <div class="l4-logo">Lena M&uuml;ller</div>
+    <div class="l4-links"><a href="#">Portfolio</a><a href="#">About</a><a href="#">CV</a><a href="#">Contact</a></div>
+  </nav>
+  <div class="l4-hero">
+    <div class="l4-hero-left">
+      <div class="l4-label">Freie Kunst &middot; Weimar</div>
+      <h1><strong>Malerei</strong> und Installation an der Schnittstelle von Material und Raum.</h1>
+      <p>Bauhaus-Universität Weimar, Studium der Freien Kunst seit 2022. Arbeiten in Öl, Acryl, Mixed Media und raumbezogener Installation.</p>
+      <a href="#" class="l4-outline-btn">Portfolio ansehen &rarr;</a>
+    </div>
+    <div class="l4-hero-grid">
+      <div class="cell"><img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=450&h=450&fit=crop&q=80" alt="" loading="lazy"></div>
+      <div class="cell"><img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=450&h=450&fit=crop&q=80" alt="" loading="lazy"></div>
+      <div class="cell"><img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=450&h=450&fit=crop&q=80" alt="" loading="lazy"></div>
+      <div class="cell"><img src="https://images.unsplash.com/photo-1501472312651-726afe119ff1?w=450&h=450&fit=crop&q=80" alt="" loading="lazy"></div>
     </div>
   </div>
-  <div class="browser-frame sr">
-    <div class="browser-chrome">
-      <div class="browser-dots"><span></span><span></span><span></span></div>
-      <div class="browser-url">lena-mueller-kunst.de</div>
-    </div>
-    <div class="browser-body">
-      <div class="s4-page">
-        <nav class="s4-nav">
-          <div class="s4-logo">Lena M&uuml;ller</div>
-          <div class="s4-links">
-            <a href="#">Portfolio</a>
-            <a href="#">About</a>
-            <a href="#">CV</a>
-            <a href="#">Contact</a>
-          </div>
-        </nav>
-        <div class="s4-hero">
-          <div class="s4-hero-left">
-            <div class="s4-label">Freie Kunst &middot; Weimar</div>
-            <h2><strong>Malerei</strong> und Installation an der Schnittstelle von Material und Raum.</h2>
-            <p>Bauhaus-Universität Weimar, Studium der Freien Kunst seit 2022. Arbeiten in Öl, Acryl, Mixed Media und raumbezogener Installation.</p>
-            <a href="#" class="s4-btn">Portfolio &rarr;</a>
-          </div>
-          <div class="s4-hero-right">
-            <div class="s4-cell"><img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400&h=300&fit=crop&q=80" alt="" loading="lazy"></div>
-            <div class="s4-cell"><img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=400&h=300&fit=crop&q=80" alt="" loading="lazy"></div>
-            <div class="s4-cell"><img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=400&h=300&fit=crop&q=80" alt="" loading="lazy"></div>
-            <div class="s4-cell"><img src="https://images.unsplash.com/photo-1501472312651-726afe119ff1?w=400&h=300&fit=crop&q=80" alt="" loading="lazy"></div>
-          </div>
-        </div>
-        <div class="s4-info">
-          <div class="s4-info-item"><div class="num">24</div><div class="txt">Werke</div></div>
-          <div class="s4-info-item"><div class="num">6</div><div class="txt">Ausstellungen</div></div>
-          <div class="s4-info-item"><div class="num">3</div><div class="txt">Stipendien</div></div>
-          <div class="s4-info-item"><div class="num">1</div><div class="txt">Preis</div></div>
-        </div>
-      </div>
+  <div class="l4-stats">
+    <div class="l4-stat"><div class="num">24</div><div class="txt">Werke</div></div>
+    <div class="l4-stat"><div class="num">6</div><div class="txt">Ausstellungen</div></div>
+    <div class="l4-stat"><div class="num">3</div><div class="txt">Stipendien</div></div>
+    <div class="l4-stat"><div class="num">1</div><div class="txt">Preis</div></div>
+  </div>
+  <div class="l4-work">
+    <div class="l4-work-head"><h2>Ausgewählte Arbeiten</h2><span>2022 &ndash; 2025</span></div>
+    <div class="l4-work-grid">
+      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Fragmente</h4><p>Öl auf Leinwand</p></div></div>
+      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Reflexionen</h4><p>Mixed Media</p></div></div>
+      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Lichtstudie</h4><p>Aquarell</p></div></div>
+      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Horizont</h4><p>Mischtechnik</p></div></div>
     </div>
   </div>
-</section>
+  <footer class="l4-footer"><span>&copy; 2025 Lena Müller</span><span>Impressum &middot; Datenschutz</span></footer>
+</div>
 
 
 <!-- ============================================================
-     STYLE 5 — Dark Atelier
+     LAYOUT 5 — DARK ATELIER
      ============================================================ -->
-<section class="style-section" id="style5">
-  <div class="style-header">
-    <div class="style-num sr">05</div>
-    <div class="style-meta">
-      <h3 class="style-name sr sr-d1">Dark Atelier</h3>
-      <p class="style-tagline sr sr-d2">Dramatisches Kino-Feeling, Gold-Akzente, geheimnisvolle Tiefe</p>
-      <div class="style-tags sr sr-d3">
-        <span class="style-tag">Dark Mode</span>
-        <span class="style-tag">Cinematic</span>
-        <span class="style-tag">Gold</span>
-        <span class="style-tag">Dramatisch</span>
-      </div>
+<div class="layout l5" id="l5">
+  <nav class="l5-nav">
+    <div class="l5-logo">Lena M&uuml;ller</div>
+    <div class="l5-links"><a href="#">Portfolio</a><a href="#">&Uuml;ber mich</a><a href="#">Ausstellungen</a><a href="#">Kontakt</a></div>
+  </nav>
+  <div class="l5-hero">
+    <div class="l5-hero-bg">
+      <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=1400&h=800&fit=crop&q=80" alt="" loading="lazy">
+    </div>
+    <div class="l5-hero-content">
+      <div class="kicker">Portfolio 2022 &ndash; 2025</div>
+      <h1>Zwischen<br><em>Licht</em> und<br>Materie.</h1>
+      <p>Arbeiten in Malerei, Installation und digitaler Kunst. Studium der Freien Kunst an der Bauhaus-Universität Weimar.</p>
+      <a href="#" class="l5-gold-btn">Portfolio entdecken &rarr;</a>
     </div>
   </div>
-  <div class="browser-frame sr">
-    <div class="browser-chrome" style="background:#1a1a1a;border-color:rgba(255,255,255,.08)">
-      <div class="browser-dots"><span></span><span></span><span></span></div>
-      <div class="browser-url" style="background:rgba(255,255,255,.06);color:#666">lena-mueller-kunst.de</div>
+  <div class="l5-gallery">
+    <div class="l5-gal-item">
+      <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l5-gal-over"><h4>Fragmente</h4><p>&Ouml;l auf Leinwand</p></div>
     </div>
-    <div class="browser-body" style="border-color:rgba(255,255,255,.08)">
-      <div class="s5-page">
-        <nav class="s5-nav">
-          <div class="s5-logo">Lena M&uuml;ller</div>
-          <div class="s5-links">
-            <a href="#">Portfolio</a>
-            <a href="#">&Uuml;ber mich</a>
-            <a href="#">Ausstellungen</a>
-            <a href="#">Kontakt</a>
-          </div>
-        </nav>
-        <div class="s5-hero">
-          <div class="s5-hero-bg">
-            <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=1200&h=600&fit=crop&q=80" alt="" loading="lazy">
-          </div>
-          <div class="s5-hero-content">
-            <div class="s5-label">Portfolio 2022 &ndash; 2025</div>
-            <h2>Zwischen<br><em>Licht</em> und<br>Materie.</h2>
-            <p>Arbeiten in Malerei, Installation und digitaler Kunst. Studium der Freien Kunst, Bauhaus-Universität Weimar.</p>
-            <a href="#" class="s5-btn">Portfolio entdecken</a>
-          </div>
-        </div>
-        <div class="s5-gallery">
-          <div class="s5-gallery-item">
-            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=530&fit=crop&q=80" alt="" loading="lazy">
-            <div class="s5-gallery-overlay"><h4>Fragmente</h4><p>&Ouml;l auf Leinwand</p></div>
-          </div>
-          <div class="s5-gallery-item">
-            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=400&h=530&fit=crop&q=80" alt="" loading="lazy">
-            <div class="s5-gallery-overlay"><h4>Lichtstudie III</h4><p>Aquarell</p></div>
-          </div>
-          <div class="s5-gallery-item">
-            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=530&fit=crop&q=80" alt="" loading="lazy">
-            <div class="s5-gallery-overlay"><h4>Abstraktion</h4><p>Acryl &amp; Mixed Media</p></div>
-          </div>
-          <div class="s5-gallery-item">
-            <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=400&h=530&fit=crop&q=80" alt="" loading="lazy">
-            <div class="s5-gallery-overlay"><h4>Horizont</h4><p>Mischtechnik</p></div>
-          </div>
-        </div>
-      </div>
+    <div class="l5-gal-item">
+      <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l5-gal-over"><h4>Lichtstudie III</h4><p>Aquarell</p></div>
+    </div>
+    <div class="l5-gal-item">
+      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l5-gal-over"><h4>Abstraktion</h4><p>Acryl &amp; Mixed Media</p></div>
+    </div>
+    <div class="l5-gal-item">
+      <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+      <div class="l5-gal-over"><h4>Horizont</h4><p>Mischtechnik</p></div>
     </div>
   </div>
-</section>
-
-</div><!-- /showcase -->
+  <div class="l5-about">
+    <div class="l5-about-img">
+      <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop&q=80" alt="" loading="lazy">
+    </div>
+    <div class="l5-about-text">
+      <div class="kicker">Über die Künstlerin</div>
+      <h3>Kunst als Prozess des Verstehens.</h3>
+      <p>Studium der Freien Kunst an der Bauhaus-Universität Weimar seit 2022. Arbeiten in Malerei, Installation und digitaler Kunst.</p>
+      <blockquote>„Kunst ist für mich kein Produkt, sondern ein Prozess des Verstehens."</blockquote>
+    </div>
+  </div>
+  <footer class="l5-footer"><span>&copy; 2025 Lena Müller</span><span>Impressum &middot; Datenschutz</span></footer>
+</div>
 
 
 <!-- ============================================================
-     CMS FEATURES
+     CTA BAR
      ============================================================ -->
-<section class="features" id="features">
-  <div class="features-inner">
-    <div class="section-label sr">Was dieses CMS kann</div>
-    <h2 class="section-title sr sr-d1">Alles, was du brauchst.<br>Nichts, was dich überfordert.</h2>
-    <p class="section-desc sr sr-d2" style="margin:1rem auto 0">PHP-basiert, ohne Datenbank, ohne Framework. Perfekt für Anfänger.</p>
-
-    <div class="features-grid">
-      <div class="feature-card sr">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <h4>Kein Framework nötig</h4>
-        <p>Reines PHP. Kein Laravel, kein Symfony, kein Composer. Auf den Server laden und loslegen.</p>
-      </div>
-      <div class="feature-card sr sr-d1">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h6"/></svg>
-        </div>
-        <h4>Admin-Dashboard</h4>
-        <p>Seiten bearbeiten, Bilder hochladen, Farben ändern – alles über ein einfaches Webinterface.</p>
-      </div>
-      <div class="feature-card sr sr-d2">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-        </div>
-        <h4>JSON statt Datenbank</h4>
-        <p>Alle Inhalte als einfache JSON-Dateien. Leicht zu verstehen, zu bearbeiten und zu sichern.</p>
-      </div>
-      <div class="feature-card sr">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        </div>
-        <h4>Styles anpassbar</h4>
-        <p>Farben, Schriften und Akzente über das Admin-Panel ändern – ganz ohne CSS-Kenntnisse.</p>
-      </div>
-      <div class="feature-card sr sr-d1">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-        </div>
-        <h4>Responsive Design</h4>
-        <p>Sieht auf Smartphone, Tablet und Desktop gleich gut aus. Automatisch.</p>
-      </div>
-      <div class="feature-card sr sr-d2">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-        </div>
-        <h4>Open Source</h4>
-        <p>MIT-Lizenz. Frei nutzbar, erweiterbar und mit ausführlichen Kommentaren im Code.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     CTA
-     ============================================================ -->
-<section class="cta">
-  <div class="cta-inner">
-    <h2 class="sr">Bereit für <em>deine</em><br>Kunst-Website?</h2>
-    <p class="sr sr-d1">Clone das Repo, lade es auf deinen Server hoch und passe es über das Admin-Panel an. In der README findest du eine Schritt-für-Schritt-Anleitung.</p>
-    <a href="https://github.com/crorry-dev/example_website_with_cms" class="btn-primary sr sr-d2" target="_blank">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      Jetzt starten
-    </a>
-  </div>
-</section>
-
-
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
-<footer class="site-footer">
-  <p>Kunst-Website CMS &middot; Open Source unter <a href="https://github.com/crorry-dev/example_website_with_cms" target="_blank">MIT-Lizenz</a> &middot; Gebaut von <a href="https://github.com/crorry-dev" target="_blank">crorry-dev</a></p>
-</footer>
+<div class="cta-bar" id="ctaBar">
+  <p><strong>Kunst-Website CMS</strong> &mdash; Open Source, PHP, ohne Datenbank. Perfekt für Anfänger.</p>
+  <a href="https://github.com/crorry-dev/example_website_with_cms" target="_blank">Auf GitHub ansehen</a>
+  <button class="cta-close" id="ctaClose" aria-label="Schliessen">&times;</button>
+</div>
 
 
 <!-- ============================================================
      JAVASCRIPT
      ============================================================ -->
 <script>
-// Scroll Reveal
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-}, { threshold: .12 });
-document.querySelectorAll('.sr').forEach(el => io.observe(el));
-</script>
+// Layout switcher
+const layouts = document.querySelectorAll('.layout');
+const btns = document.querySelectorAll('.sw-btn');
+const switcher = document.getElementById('switcher');
 
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.layout;
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    layouts.forEach(l => l.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    // Dark switcher for dark layout
+    switcher.classList.toggle('dark', id === 'l5');
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+});
+
+// CTA bar — show after 3s
+setTimeout(() => document.getElementById('ctaBar').classList.add('show'), 3000);
+document.getElementById('ctaClose').addEventListener('click', () => {
+  document.getElementById('ctaBar').classList.remove('show');
+});
+
+// Keyboard navigation (1-5)
+document.addEventListener('keydown', e => {
+  const n = parseInt(e.key);
+  if (n >= 1 && n <= 5) {
+    btns[n - 1].click();
+  }
+});
+</script>
 </body>
 </html>
