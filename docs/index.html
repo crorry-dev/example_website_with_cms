@@ -122,7 +122,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .dash3-portrait{width:200px;height:200px;border-radius:50%;
   background:linear-gradient(135deg,#f5f0eb 0%,#e8ddd1 100%);
   margin:0 auto 2rem;display:flex;align-items:center;justify-content:center;
-  font-size:4rem;box-shadow:0 20px 60px rgba(0,0,0,.3);
+  font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;
+  color:#8b6f50;letter-spacing:.08em;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
   animation:float 6s ease-in-out infinite}
 .dash3-right{display:flex;flex-direction:column;justify-content:center;
   padding:4rem 5rem 4rem 4rem}
@@ -260,6 +262,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   color:rgba(255,255,255,.4)}
 .activity-dot{width:6px;height:6px;border-radius:50%;background:#c4a882;
   margin-top:.4rem;flex-shrink:0}
+
+/* SVG Icons */
+.ni{width:16px;height:16px;flex-shrink:0;fill:none;stroke:currentColor;
+  stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.icon svg{display:block;width:14px;height:14px;fill:none;stroke:currentColor;
+  stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
 
 /* ================================================================
    GITHUB CTA
@@ -439,7 +447,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
         <div class="dash3-left">
             <div class="dash3-left-bg" id="parallaxBg"></div>
             <div class="dash3-left-content">
-                <div class="dash3-portrait">👩‍🎨</div>
+                <div class="dash3-portrait">LM</div>
                 <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.8rem;color:#fff">
                     Lena Müller
                 </h3>
@@ -482,9 +490,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
             <h2>Kontakt</h2>
             <p>Für Ausstellungsanfragen, Kooperationen oder einfach ein Hallo.</p>
             <div class="dash4-info">
-                <div class="dash4-info-item"><div class="icon">✉</div><span>lena.mueller@example.de</span></div>
-                <div class="dash4-info-item"><div class="icon">📍</div><span>Weimar, Deutschland</span></div>
-                <div class="dash4-info-item"><div class="icon">📸</div><span>@lena.kunst</span></div>
+                <div class="dash4-info-item"><div class="icon"><svg viewBox="0 0 20 20"><rect x="1" y="4" width="18" height="13" rx="1.5"/><path d="M1 4l9 7 9-7"/></svg></div><span>lena.mueller@example.de</span></div>
+                <div class="dash4-info-item"><div class="icon"><svg viewBox="0 0 20 20"><path d="M10 1C6.7 1 4 3.7 4 7c0 5 6 12 6 12s6-7 6-12c0-3.3-2.7-6-6-6z"/><circle cx="10" cy="7" r="2"/></svg></div><span>Weimar, Deutschland</span></div>
+                <div class="dash4-info-item"><div class="icon"><svg viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="16" rx="4"/><circle cx="10" cy="10" r="4"/><circle cx="14.5" cy="5.5" r="1"/></svg></div><span>@lena.kunst</span></div>
             </div>
         </div>
         <div class="dash4-form reveal-right">
@@ -513,19 +521,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
             <!-- Sidebar -->
             <div class="ctrl-sidebar">
                 <div class="ctrl-logo">✦ CMS</div>
-                <div class="ctrl-nav-item" onclick="selectNav(this)"><span>📊</span> Dashboard <div class="dot"></div></div>
-                <div class="ctrl-nav-item active" onclick="selectNav(this)"><span>⚙️</span> Einstellungen <div class="dot"></div></div>
-                <div class="ctrl-nav-item" onclick="selectNav(this)"><span>🖼️</span> Galerie <div class="dot"></div></div>
-                <div class="ctrl-nav-item" onclick="selectNav(this)"><span>📝</span> Seiten <div class="dot"></div></div>
-                <div class="ctrl-nav-item" onclick="selectNav(this)"><span>🔤</span> Schriften <div class="dot"></div></div>
-                <div class="ctrl-nav-item" onclick="selectNav(this)" style="margin-top:auto;opacity:.4"><span>🚪</span> Ausloggen <div class="dot"></div></div>
+                <div class="ctrl-nav-item" onclick="selectNav(this)"><svg class="ni" viewBox="0 0 16 16"><rect x="1" y="9" width="3" height="6" rx=".5"/><rect x="6.5" y="5" width="3" height="10" rx=".5"/><rect x="12" y="2" width="3" height="13" rx=".5"/></svg> Dashboard <div class="dot"></div></div>
+                <div class="ctrl-nav-item active" onclick="selectNav(this)"><svg class="ni" viewBox="0 0 16 16"><line x1="1" y1="4" x2="15" y2="4"/><line x1="1" y1="8" x2="15" y2="8"/><line x1="1" y1="12" x2="15" y2="12"/><circle cx="10" cy="4" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="12" r="1.5"/></svg> Einstellungen <div class="dot"></div></div>
+                <div class="ctrl-nav-item" onclick="selectNav(this)"><svg class="ni" viewBox="0 0 16 16"><rect x="1" y="2" width="14" height="12" rx="1.5"/><circle cx="5" cy="6" r="1.5"/><path d="M1 12l4-4 3 3 2.5-2.5L15 12"/></svg> Galerie <div class="dot"></div></div>
+                <div class="ctrl-nav-item" onclick="selectNav(this)"><svg class="ni" viewBox="0 0 16 16"><path d="M4 1h6l4 4v10H4z"/><path d="M10 1v4h4"/></svg> Seiten <div class="dot"></div></div>
+                <div class="ctrl-nav-item" onclick="selectNav(this)"><svg class="ni" viewBox="0 0 16 16"><path d="M3 14L8 2l5 12"/><line x1="5" y1="10" x2="11" y2="10"/></svg> Schriften <div class="dot"></div></div>
+                <div class="ctrl-nav-item" onclick="selectNav(this)" style="margin-top:auto;opacity:.4"><svg class="ni" viewBox="0 0 16 16"><path d="M6 2H3v12h3"/><path d="M7 8h7M12 5l3 3-3 3"/></svg> Ausloggen <div class="dot"></div></div>
             </div>
 
             <!-- Main -->
             <div class="ctrl-main">
                 <div class="ctrl-topbar">
-                    <h3>⚙️ Einstellungen</h3>
-                    <button class="ctrl-save" onclick="this.textContent='✓ Gespeichert!';setTimeout(()=>this.textContent='💾 Speichern',1500)">💾 Speichern</button>
+                    <h3>Einstellungen</h3>
+                    <button class="ctrl-save" onclick="this.textContent='Gespeichert ✓';setTimeout(()=>this.textContent='Speichern',1500)">Speichern</button>
                 </div>
                 <div class="ctrl-fields">
                     <div class="ctrl-field"><label>Seitenname</label><input value="Lena Müller"></div>
@@ -547,7 +555,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 
             <!-- Stats Panel -->
             <div class="ctrl-panel">
-                <div class="ctrl-panel-title">📊 Übersicht</div>
+                <div class="ctrl-panel-title">Übersicht</div>
                 <div class="stat-card">
                     <div class="stat-label">Galerie-Bilder</div>
                     <div class="stat-value" id="statImages">0</div>
