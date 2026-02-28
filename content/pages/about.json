@@ -1,0 +1,19 @@
+{
+    "title": "Über mich",
+    "text": "<p>Ich bin Kunststudentin an der Hochschule für Gestaltung. Meine künstlerische Praxis bewegt sich im Spannungsfeld zwischen traditionellen Medien wie Zeichnung und Malerei und zeitgenössischen digitalen Techniken.</p><p>In meiner Arbeit erforsche ich, wie persönliche Geschichte und kollektives Gedächtnis visuelle Form annehmen können.</p>",
+    "image": "",
+    "cv": [
+        {
+            "year": "2024",
+            "text": "Gruppenausstellung »Neue Stimmen«, Galerie am Markt, Weimar"
+        },
+        {
+            "year": "2023",
+            "text": "Beginn des Studiums Freie Kunst, Hochschule für Gestaltung"
+        },
+        {
+            "year": "2022",
+            "text": "Abitur und erstes Praktikum im Bereich Buchgestaltung"
+        }
+    ]
+}

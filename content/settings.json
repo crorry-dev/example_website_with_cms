@@ -1,0 +1,17 @@
+{
+    "site_name": "Meine Kunstseite",
+    "site_tagline": "Kunst. Design. Inspiration.",
+    "site_email": "",
+    "accent_color": "#c4a882",
+    "bg_color": "#f5f0eb",
+    "text_color": "#1a1a1a",
+    "font_heading": "Playfair Display",
+    "font_body": "Lato",
+    "custom_font": "",
+    "custom_font_url": "",
+    "admin_password": "$2y$10$6rCC\/y9Umg3yXQOa5J1F0e0vz5xWjd.Cy3d0uPj9IFo\/CQjZT4eqO",
+    "footer_text": "© 2024 Meine Kunstseite. Alle Rechte vorbehalten.",
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_twitter": ""
+}
