@@ -1,0 +1,126 @@
+# ====================================================================
+# .htaccess - Apache Webserver Konfiguration
+# ====================================================================
+# Diese Datei wird vom Apache-Webserver gelesen und steuert viele
+# wichtige Sicherheits- und URL-Einstellungen.
+#
+# ".htaccess" = "hypertext access" (versteckte Konfigurationsdatei)
+# Der Punkt am Anfang macht sie auf Linux/Mac-Systemen versteckt.
+#
+# WICHTIG: Diese Datei muss im Hauptverzeichnis deines Projekts liegen!
+# ====================================================================
+
+# Apache-Version für diese Konfiguration
+Options -Indexes        # Verzeichnis-Listing deaktivieren (Sicherheit!)
+Options +FollowSymlinks # Symbolische Links erlauben
+
+# PHP-Fehlerausgabe in Produktion deaktivieren
+# (Ändern wenn du Fehler debuggen möchtest)
+# php_flag display_errors Off
+
+# ====================================================================
+# URL-UMSCHREIBUNGEN (URL Rewriting)
+# Erlaubt "schöne" URLs ohne .php-Erweiterung
+# ====================================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # index.php ist die Standard-Datei
+    DirectoryIndex index.php
+
+    # Wenn eine Datei oder ein Ordner existiert: direkt ausgeben
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Optionale "schöne" URLs (ohne .php)
+    # Beispiel: /gallery → gallery.php
+    # RewriteRule ^([a-z]+)$ $1.php [L]
+</IfModule>
+
+# ====================================================================
+# SICHERHEIT (Security Headers)
+# Diese HTTP-Header schützen vor häufigen Web-Angriffen.
+# ====================================================================
+<IfModule mod_headers.c>
+    # XSS-Schutz (Cross-Site Scripting)
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Verhindert Clickjacking (Seite in fremdem iframe laden)
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Verhindert MIME-Type Sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Referrer-Policy: Weniger Informationen weitergeben
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Cache-Kontrolle für Admin-Seiten
+    <FilesMatch "\.(php)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# ====================================================================
+# SCHUTZ SENSIBLER DATEIEN
+# Verhindert direkten Browser-Zugriff auf Konfigurationsdateien!
+# ====================================================================
+
+# config/ Verzeichnis komplett sperren
+<FilesMatch "^(config\.php|functions\.php|auth\.php)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# JSON-Inhaltsdateien schützen
+<FilesMatch "\.json$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# .htaccess selbst schützen
+<FilesMatch "^\.htaccess$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# ====================================================================
+# PERFORMANCE (Caching & Komprimierung)
+# ====================================================================
+
+# Browser-Caching für statische Dateien aktivieren
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Bilder lange cachen (1 Jahr)
+    ExpiresByType image/jpeg   "access plus 1 year"
+    ExpiresByType image/png    "access plus 1 year"
+    ExpiresByType image/gif    "access plus 1 year"
+    ExpiresByType image/webp   "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+
+    # Schriftarten cachen
+    ExpiresByType font/ttf     "access plus 1 year"
+    ExpiresByType font/woff    "access plus 1 year"
+    ExpiresByType font/woff2   "access plus 1 year"
+
+    # CSS und JS kürzer cachen (können sich öfter ändern)
+    ExpiresByType text/css     "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+</IfModule>
+
+# GZIP-Komprimierung (sendet kleinere Dateien → schnellere Ladezeit)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ====================================================================
+# FEHLERSEITEN (Custom Error Pages)
+# ====================================================================
+# ErrorDocument 404 /404.php   # Eigene 404-Fehlerseite (optional)

@@ -1,0 +1,4 @@
+# .htaccess für den content/-Ordner
+# Verhindert JEDEN direkten Zugriff auf die Inhaltsdateien
+Order Deny,Allow
+Deny from all

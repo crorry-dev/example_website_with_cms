@@ -1,0 +1,18 @@
+# Hochgeladene Dateien werden nicht in Git gespeichert
+# (Jeder Benutzer hat seine eigenen Bilder)
+assets/uploads/images/*
+assets/uploads/fonts/*
+
+# Aber die Verzeichnisse selbst sollen existieren (wichtig für Hosting)
+!assets/uploads/images/.gitkeep
+!assets/uploads/fonts/.gitkeep
+
+# Versteckte Systemdateien
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# PHP-Debugger und temporäre Dateien
+*.log
+/tmp/
