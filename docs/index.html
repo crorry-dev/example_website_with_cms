@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kunst-Website CMS - 5 Layout-Vorlagen</title>
-<meta name="description" content="Open-Source CMS für Kunst-Portfolios. 5 verschiedene Layouts zum Ausprobieren.">
+<title>Kunst-Website CMS - 5 Layout-Vorlagen + Admin Preview</title>
+<meta name="description" content="Open-Source CMS fuer Kunst-Portfolios. 5 verschiedene Layouts zum Ausprobieren.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Lato:wght@300;400;700&family=DM+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +18,17 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
-/* === STYLE SWITCHER (sticky top bar) === */
+/* === SCROLL REVEAL ANIMATION === */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .85s ease,transform .85s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .85s ease,transform .85s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .85s ease,transform .85s ease}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+/* === STYLE SWITCHER === */
 .switcher{position:fixed;top:0;left:0;right:0;z-index:9999;
   display:flex;align-items:center;justify-content:center;gap:.35rem;
   padding:.55rem 1rem;
@@ -46,15 +56,15 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .sw-gh svg{width:14px;height:14px}
 
 /* === LAYOUT SECTIONS === */
-.layout{display:none;min-height:100vh;padding-top:44px}
+.layout{display:none;min-height:100vh;padding-top:44px;animation:layoutFadeIn .5s ease}
 .layout.active{display:block}
+@keyframes layoutFadeIn{from{opacity:0}to{opacity:1}}
 
-/* === SHARED UTILITY === */
-.container{max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
+/* === SECTION DIVIDER (shared) === */
+.section-divider{width:60px;height:1px;margin:0 auto}
 
 /* ================================================================
    LAYOUT 1 - GALERIE CLASSIQUE
-   Helles Museum, Serifen, goldener Akzent, viel Weissraum
    ================================================================ */
 .l1{background:#faf8f5;color:#1a1a1a;font-family:'Cormorant Garamond',serif}
 .l1-nav{display:flex;justify-content:space-between;align-items:center;
@@ -62,8 +72,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l1-logo{font-size:1.5rem;font-weight:300;font-style:italic;color:#8b6f50;letter-spacing:.02em}
 .l1-links{display:flex;gap:clamp(1rem,3vw,2.5rem)}
 .l1-links a{font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.18em;
-  text-transform:uppercase;color:#aaa;font-weight:400;transition:color .3s;
-  position:relative}
+  text-transform:uppercase;color:#aaa;font-weight:400;transition:color .3s;position:relative}
 .l1-links a::after{content:'';position:absolute;bottom:-.35rem;left:0;width:0;height:1px;
   background:#c4a882;transition:width .3s}
 .l1-links a:hover{color:#333}
@@ -71,19 +80,16 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 .l1-hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 120px);
   max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem)}
-.l1-hero-text{display:flex;flex-direction:column;justify-content:center;
-  padding:4rem 4rem 4rem 0}
+.l1-hero-text{display:flex;flex-direction:column;justify-content:center;padding:4rem 4rem 4rem 0}
 .l1-hero-text .kicker{font-family:'DM Mono',monospace;font-size:.6rem;
   letter-spacing:.35em;text-transform:uppercase;color:#b8a080;margin-bottom:1.5rem}
-.l1-hero-text h1{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:300;
-  line-height:1.08;letter-spacing:-.02em}
+.l1-hero-text h1{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:300;line-height:1.08;letter-spacing:-.02em}
 .l1-hero-text h1 em{font-style:italic;color:#a08060}
 .l1-hero-text p{font-family:'DM Sans',sans-serif;font-size:.92rem;color:#aaa;
   margin-top:2rem;line-height:1.8;font-weight:300;max-width:400px}
-.l1-btn{display:inline-flex;align-items:center;gap:.6rem;
-  margin-top:2.5rem;padding:.8rem 2rem;border:1px solid #c4a882;color:#8b6f50;
-  font-family:'DM Sans',sans-serif;font-size:.7rem;letter-spacing:.18em;
-  text-transform:uppercase;font-weight:500;transition:all .35s}
+.l1-btn{display:inline-flex;align-items:center;gap:.6rem;margin-top:2.5rem;padding:.8rem 2rem;
+  border:1px solid #c4a882;color:#8b6f50;font-family:'DM Sans',sans-serif;font-size:.7rem;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:all .35s}
 .l1-btn:hover{background:#c4a882;color:#fff}
 .l1-hero-img{position:relative;overflow:hidden}
 .l1-hero-img img{width:100%;height:100%;object-fit:cover;
@@ -93,8 +99,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l1-section-head{text-align:center;padding:6rem 0 3rem}
 .l1-section-head .kicker{font-family:'DM Mono',monospace;font-size:.6rem;
   letter-spacing:.35em;text-transform:uppercase;color:#b8a080}
-.l1-section-head h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-top:.4rem;
-  letter-spacing:-.02em}
+.l1-section-head h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-top:.4rem;letter-spacing:-.02em}
 
 .l1-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
   padding:0 clamp(1.5rem,4vw,4rem) 6rem;max-width:1280px;margin:0 auto}
@@ -102,14 +107,13 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l1-gal-item img{width:100%;height:100%;object-fit:cover;
   transition:transform .9s cubic-bezier(.25,.46,.45,.94)}
 .l1-gal-item:hover img{transform:scale(1.06)}
-.l1-gal-cap{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;padding:1.8rem;
-  background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);
+.l1-gal-cap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.8rem;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);
   opacity:0;transition:opacity .45s;color:#fff}
 .l1-gal-item:hover .l1-gal-cap{opacity:1}
 .l1-gal-cap h4{font-size:1.2rem;font-weight:400;letter-spacing:.01em}
-.l1-gal-cap p{font-family:'DM Sans',sans-serif;font-size:.65rem;
-  color:rgba(255,255,255,.55);margin-top:.25rem;letter-spacing:.06em}
+.l1-gal-cap p{font-family:'DM Sans',sans-serif;font-size:.65rem;color:rgba(255,255,255,.55);
+  margin-top:.25rem;letter-spacing:.06em}
 
 .l1-about{display:grid;grid-template-columns:1fr 1fr;gap:4rem;
   max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem) 6rem;align-items:center}
@@ -117,13 +121,45 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l1-about-img img{width:100%;height:100%;object-fit:cover}
 .l1-about-text .kicker{font-family:'DM Mono',monospace;font-size:.6rem;
   letter-spacing:.35em;text-transform:uppercase;color:#b8a080;margin-bottom:1rem}
-.l1-about-text h3{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;margin-bottom:1.5rem;
-  line-height:1.2}
-.l1-about-text p{font-family:'DM Sans',sans-serif;font-size:.88rem;color:#999;
-  line-height:1.85;font-weight:300}
-.l1-about-text blockquote{margin-top:2rem;padding-left:1.5rem;
-  border-left:2px solid #c4a882;font-style:italic;color:#aaa;font-size:1.05rem;
-  line-height:1.6}
+.l1-about-text h3{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;margin-bottom:1.5rem;line-height:1.2}
+.l1-about-text p{font-family:'DM Sans',sans-serif;font-size:.88rem;color:#999;line-height:1.85;font-weight:300}
+.l1-about-text blockquote{margin-top:2rem;padding-left:1.5rem;border-left:2px solid #c4a882;
+  font-style:italic;color:#aaa;font-size:1.05rem;line-height:1.6}
+
+/* L1 Vita */
+.l1-vita{max-width:800px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem) 6rem}
+.l1-vita-item{display:grid;grid-template-columns:120px 1fr;gap:2rem;
+  padding:2rem 0;border-bottom:1px solid rgba(0,0,0,.06);position:relative}
+.l1-vita-item::before{content:'';position:absolute;left:135px;top:0;bottom:0;
+  width:1px;background:linear-gradient(to bottom,transparent,#c4a882,transparent)}
+.l1-vita-item::after{content:'';position:absolute;left:131px;top:2.4rem;
+  width:9px;height:9px;border-radius:50%;background:#c4a882}
+.l1-vita-year{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.15em;
+  color:#b8a080;padding-top:.15rem}
+.l1-vita-info h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;
+  margin-bottom:.3rem}
+.l1-vita-info p{font-family:'DM Sans',sans-serif;font-size:.78rem;color:#aaa;line-height:1.6}
+
+/* L1 Kontakt */
+.l1-contact{max-width:600px;margin:0 auto;padding:0 clamp(1.5rem,4vw,4rem) 6rem}
+.l1-contact-text{text-align:center;margin-bottom:3rem}
+.l1-contact-text p{font-family:'DM Sans',sans-serif;font-size:.88rem;color:#aaa;
+  margin-top:1rem;line-height:1.7}
+.l1-form label{display:block;font-family:'DM Sans',sans-serif;font-size:.65rem;
+  letter-spacing:.18em;text-transform:uppercase;color:#bbb;margin-bottom:.4rem;font-weight:500}
+.l1-form input,.l1-form textarea{width:100%;padding:.9rem 1rem;border:1px solid #e0d8cf;
+  background:transparent;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#333;
+  margin-bottom:1.5rem;transition:border-color .3s;outline:none}
+.l1-form input:focus,.l1-form textarea:focus{border-color:#c4a882}
+.l1-form textarea{height:140px;resize:vertical}
+.l1-form button{width:100%;padding:.9rem;background:#c4a882;color:#fff;border:none;
+  font-family:'DM Sans',sans-serif;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;cursor:pointer;transition:background .3s}
+.l1-form button:hover{background:#a08060}
+.l1-contact-info{display:flex;justify-content:center;gap:3rem;margin-top:2.5rem;
+  font-family:'DM Sans',sans-serif;font-size:.75rem;color:#bbb}
+.l1-contact-info a{color:#b8a080;transition:color .3s}
+.l1-contact-info a:hover{color:#8b6f50}
 
 .l1-footer{border-top:1px solid rgba(0,0,0,.06);padding:2.5rem clamp(1.5rem,4vw,4rem);
   max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;
@@ -131,7 +167,6 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 /* ================================================================
    LAYOUT 2 - BRUTALIST STUDIO
-   Schwarz-Weiss, fette Typo, harte Kanten, Grid-Linien
    ================================================================ */
 .l2{background:#ebebeb;color:#111;font-family:'Space Grotesk',sans-serif}
 .l2-nav{display:flex;justify-content:space-between;align-items:center;
@@ -150,9 +185,8 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l2-hero-row{display:flex;justify-content:space-between;align-items:flex-end;
   margin-top:2rem;padding-top:2rem;border-top:3px solid #111;gap:2rem;flex-wrap:wrap}
 .l2-hero-row p{font-size:.78rem;color:#888;max-width:380px;line-height:1.65}
-.l2-hero-btn{padding:.7rem 1.8rem;background:#111;color:#fff;
-  font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;font-weight:700;
-  transition:all .25s}
+.l2-hero-btn{padding:.7rem 1.8rem;background:#111;color:#fff;font-size:.62rem;
+  text-transform:uppercase;letter-spacing:.18em;font-weight:700;transition:all .25s}
 .l2-hero-btn:hover{background:#c4a882;color:#111}
 
 .l2-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:3px solid #111}
@@ -162,19 +196,28 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   filter:grayscale(100%) contrast(1.1);transition:filter .5s}
 .l2-grid-item:hover img{filter:grayscale(0%) contrast(1)}
 .l2-grid-meta{position:absolute;bottom:0;left:0;right:0;padding:.8rem 1rem;
-  background:#111;color:#fff;font-size:.55rem;text-transform:uppercase;
-  letter-spacing:.2em;display:flex;justify-content:space-between;
-  transform:translateY(100%);transition:transform .25s ease}
+  background:#111;color:#fff;font-size:.55rem;text-transform:uppercase;letter-spacing:.2em;
+  display:flex;justify-content:space-between;transform:translateY(100%);transition:transform .25s ease}
 .l2-grid-item:hover .l2-grid-meta{transform:translateY(0)}
 
-.l2-manifesto{padding:clamp(4rem,8vw,7rem) 2rem;
-  border-top:3px solid #111;border-bottom:3px solid #111}
-.l2-manifesto blockquote{font-family:'Syne',sans-serif;
-  font-size:clamp(1.6rem,4vw,3rem);font-weight:700;line-height:1.2;
-  max-width:800px;text-transform:uppercase}
+.l2-manifesto{padding:clamp(4rem,8vw,7rem) 2rem;border-top:3px solid #111;border-bottom:3px solid #111}
+.l2-manifesto blockquote{font-family:'Syne',sans-serif;font-size:clamp(1.6rem,4vw,3rem);
+  font-weight:700;line-height:1.2;max-width:800px;text-transform:uppercase}
 .l2-manifesto blockquote span{color:#c4a882}
-.l2-manifesto cite{display:block;margin-top:1.5rem;font-size:.7rem;
-  font-style:normal;letter-spacing:.15em;text-transform:uppercase;color:#888}
+.l2-manifesto cite{display:block;margin-top:1.5rem;font-size:.7rem;font-style:normal;
+  letter-spacing:.15em;text-transform:uppercase;color:#888}
+
+/* L2 About */
+.l2-about{display:grid;grid-template-columns:1fr 1fr;border-bottom:3px solid #111}
+.l2-about-img{overflow:hidden;border-right:3px solid #111}
+.l2-about-img img{width:100%;height:100%;object-fit:cover;min-height:400px;
+  filter:grayscale(100%) contrast(1.1)}
+.l2-about-text{padding:clamp(2rem,5vw,4rem);display:flex;flex-direction:column;justify-content:center}
+.l2-about-text .tag{font-family:'Syne',sans-serif;font-size:.6rem;text-transform:uppercase;
+  letter-spacing:.25em;color:#888;margin-bottom:1rem;font-weight:700}
+.l2-about-text h3{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:800;text-transform:uppercase;line-height:1.1;margin-bottom:1.5rem}
+.l2-about-text p{font-size:.82rem;color:#666;line-height:1.75}
 
 .l2-info{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:3px solid #111}
 .l2-info-item{padding:2rem;border-right:3px solid #111;text-align:center}
@@ -183,12 +226,42 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l2-info-item .label{font-size:.55rem;text-transform:uppercase;letter-spacing:.2em;
   color:#888;margin-top:.25rem}
 
+/* L2 Vita */
+.l2-vita{border-bottom:3px solid #111}
+.l2-vita-item{display:flex;border-bottom:3px solid #111;transition:background .2s}
+.l2-vita-item:last-child{border-bottom:none}
+.l2-vita-item:hover{background:rgba(0,0,0,.03)}
+.l2-vita-year{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:800;
+  padding:1.5rem 2rem;border-right:3px solid #111;min-width:clamp(100px,15vw,180px);
+  display:flex;align-items:center}
+.l2-vita-content{padding:1.5rem 2rem;display:flex;flex-direction:column;justify-content:center}
+.l2-vita-content h4{font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em}
+.l2-vita-content p{font-size:.72rem;color:#888;margin-top:.25rem;letter-spacing:.04em}
+
+/* L2 Kontakt */
+.l2-contact{padding:clamp(3rem,6vw,5rem) 2rem;border-bottom:3px solid #111}
+.l2-contact h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;
+  text-transform:uppercase;margin-bottom:2rem}
+.l2-form{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:700px}
+.l2-form input,.l2-form textarea{width:100%;padding:1rem;border:3px solid #111;
+  background:transparent;font-family:'Space Grotesk',sans-serif;font-size:.82rem;
+  color:#111;outline:none;margin:-1.5px}
+.l2-form input::placeholder,.l2-form textarea::placeholder{color:#aaa;text-transform:uppercase;
+  font-size:.65rem;letter-spacing:.15em}
+.l2-form textarea{grid-column:span 2;height:130px;resize:none}
+.l2-form button{grid-column:span 2;padding:1rem;background:#111;color:#fff;border:3px solid #111;
+  font-family:'Syne',sans-serif;font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;
+  font-weight:700;cursor:pointer;transition:all .25s;margin:-1.5px}
+.l2-form button:hover{background:#c4a882;border-color:#c4a882;color:#111}
+.l2-contact-info{display:flex;gap:2rem;margin-top:2rem;font-size:.65rem;
+  text-transform:uppercase;letter-spacing:.15em;color:#888}
+
 .l2-footer{padding:1.5rem 2rem;font-size:.6rem;text-transform:uppercase;
   letter-spacing:.15em;color:#888;display:flex;justify-content:space-between}
 
 /* ================================================================
    LAYOUT 3 - ORGANIC FLOW
-   Warme Erdtöne, organische Formen, abgerundete Karten
    ================================================================ */
 .l3{background:#f6f1ea;color:#3a3025;font-family:'DM Sans',sans-serif}
 .l3-nav{display:flex;justify-content:space-between;align-items:center;
@@ -196,49 +269,39 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l3-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;
   font-weight:300;font-style:italic;color:#8b7355}
 .l3-links{display:flex;gap:2rem}
-.l3-links a{font-size:.72rem;color:#a09080;font-weight:400;
-  transition:color .3s;letter-spacing:.04em}
+.l3-links a{font-size:.72rem;color:#a09080;font-weight:400;transition:color .3s;letter-spacing:.04em}
 .l3-links a:hover{color:#5a4a38}
 
-.l3-hero{display:grid;grid-template-columns:1fr 1fr;
-  gap:clamp(2rem,4vw,4rem);align-items:center;
-  padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem);
-  position:relative;overflow:hidden}
-.l3-hero::before{content:'';position:absolute;top:-15%;right:-8%;
-  width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(196,168,130,.14) 0%,transparent 70%);
-  pointer-events:none}
-.l3-hero::after{content:'';position:absolute;bottom:-20%;left:-10%;
-  width:400px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(169,140,104,.08) 0%,transparent 70%);
-  pointer-events:none}
+.l3-hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:center;
+  padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem);position:relative;overflow:hidden}
+.l3-hero::before{content:'';position:absolute;top:-15%;right:-8%;width:500px;height:500px;
+  border-radius:50%;background:radial-gradient(circle,rgba(196,168,130,.14) 0%,transparent 70%);pointer-events:none}
+.l3-hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;
+  border-radius:50%;background:radial-gradient(circle,rgba(169,140,104,.08) 0%,transparent 70%);pointer-events:none}
 .l3-hero-text{position:relative;z-index:1}
-.l3-hero-text h1{font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.12}
+.l3-hero-text h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:300;line-height:1.12}
 .l3-hero-text h1 em{color:#a08060;font-style:italic}
-.l3-hero-text p{font-size:.88rem;color:#9a8a78;margin-top:1.5rem;
-  line-height:1.85;font-weight:300;max-width:420px}
-.l3-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;
-  padding:.7rem 1.8rem;background:linear-gradient(135deg,#c4a882,#a08a68);color:#fff;
-  border-radius:100px;font-size:.72rem;letter-spacing:.06em;font-weight:500;
-  transition:all .35s;box-shadow:0 4px 18px rgba(196,168,130,.25)}
+.l3-hero-text p{font-size:.88rem;color:#9a8a78;margin-top:1.5rem;line-height:1.85;
+  font-weight:300;max-width:420px}
+.l3-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;padding:.7rem 1.8rem;
+  background:linear-gradient(135deg,#c4a882,#a08a68);color:#fff;border-radius:100px;
+  font-size:.72rem;letter-spacing:.06em;font-weight:500;transition:all .35s;
+  box-shadow:0 4px 18px rgba(196,168,130,.25)}
 .l3-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,168,130,.35)}
 .l3-hero-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;position:relative;z-index:1}
-.l3-hero-imgs .img-card{border-radius:20px;overflow:hidden;
-  box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.l3-hero-imgs .img-card{border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08)}
 .l3-hero-imgs .img-card:nth-child(2){margin-top:2.5rem}
-.l3-hero-imgs .img-card img{width:100%;aspect-ratio:3/4;object-fit:cover;
-  transition:transform .8s ease}
+.l3-hero-imgs .img-card img{width:100%;aspect-ratio:3/4;object-fit:cover;transition:transform .8s ease}
 .l3-hero-imgs .img-card:hover img{transform:scale(1.04)}
 
-.l3-features{display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;padding:0 clamp(1.5rem,4vw,3.5rem) clamp(3rem,6vw,5rem)}
-.l3-feat{background:rgba(255,255,255,.65);backdrop-filter:blur(10px);
-  border-radius:20px;padding:2rem;border:1px solid rgba(196,168,130,.1);
-  transition:transform .3s,box-shadow .3s}
+.l3-features{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  padding:0 clamp(1.5rem,4vw,3.5rem) clamp(3rem,6vw,5rem)}
+.l3-feat{background:rgba(255,255,255,.65);backdrop-filter:blur(10px);border-radius:20px;
+  padding:2rem;border:1px solid rgba(196,168,130,.1);transition:transform .3s,box-shadow .3s}
 .l3-feat:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,.06)}
-.l3-feat h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;
-  font-weight:600;color:#5a4a38;margin-bottom:.6rem}
+.l3-feat h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;
+  color:#5a4a38;margin-bottom:.6rem}
 .l3-feat p{font-size:.78rem;color:#a09080;line-height:1.7}
 
 .l3-gallery-head{text-align:center;padding:4rem 0 2.5rem}
@@ -247,29 +310,70 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l3-gallery-head h2{font-family:'Cormorant Garamond',serif;
   font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;margin-top:.4rem}
 
-.l3-masonry{column-count:3;column-gap:1.2rem;
-  padding:0 clamp(1.5rem,4vw,3.5rem) 5rem}
-.l3-masonry .m-item{break-inside:avoid;margin-bottom:1.2rem;border-radius:16px;
-  overflow:hidden;position:relative;cursor:pointer;
-  box-shadow:0 4px 20px rgba(0,0,0,.06)}
-.l3-masonry .m-item img{width:100%;display:block;
-  transition:transform .7s ease}
+.l3-masonry{column-count:3;column-gap:1.2rem;padding:0 clamp(1.5rem,4vw,3.5rem) 5rem}
+.l3-masonry .m-item{break-inside:avoid;margin-bottom:1.2rem;border-radius:16px;overflow:hidden;
+  position:relative;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.l3-masonry .m-item img{width:100%;display:block;transition:transform .7s ease}
 .l3-masonry .m-item:hover img{transform:scale(1.04)}
-.l3-m-cap{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;padding:1.4rem;
-  background:linear-gradient(to top,rgba(58,48,37,.7) 0%,transparent 50%);
+.l3-m-cap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.4rem;background:linear-gradient(to top,rgba(58,48,37,.7) 0%,transparent 50%);
   opacity:0;transition:opacity .35s;color:#fff}
 .l3-masonry .m-item:hover .l3-m-cap{opacity:1}
 .l3-m-cap h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400}
 .l3-m-cap p{font-size:.6rem;color:rgba(255,255,255,.55);margin-top:.15rem;letter-spacing:.05em}
 
-.l3-footer{border-top:1px solid rgba(0,0,0,.06);
-  padding:2rem clamp(1.5rem,4vw,3.5rem);text-align:center;
-  font-size:.72rem;color:#bbb}
+/* L3 About */
+.l3-about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:center;
+  padding:0 clamp(1.5rem,4vw,3.5rem) clamp(4rem,6vw,5rem)}
+.l3-about-img{border-radius:24px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,.08)}
+.l3-about-img img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.l3-about-text .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#b8a080;margin-bottom:1rem}
+.l3-about-text h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:300;margin-bottom:1.2rem;line-height:1.2}
+.l3-about-text p{font-size:.85rem;color:#9a8a78;line-height:1.85;font-weight:300}
+.l3-about-text blockquote{margin-top:1.5rem;padding-left:1.5rem;border-left:3px solid #c4a882;
+  border-radius:0 12px 12px 0;background:rgba(196,168,130,.06);padding:1.2rem 1.5rem;
+  font-family:'Cormorant Garamond',serif;font-style:italic;color:#8b7355;font-size:1.05rem;line-height:1.5}
+
+/* L3 Vita */
+.l3-vita{padding:0 clamp(1.5rem,4vw,3.5rem) clamp(4rem,6vw,5rem);max-width:900px;margin:0 auto}
+.l3-vita-item{display:flex;gap:1.5rem;padding:1.5rem;margin-bottom:1rem;
+  background:rgba(255,255,255,.6);border-radius:16px;border:1px solid rgba(196,168,130,.1);
+  backdrop-filter:blur(8px);transition:transform .3s,box-shadow .3s}
+.l3-vita-item:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.l3-vita-year{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+  color:#b8a080;min-width:55px;padding-top:.2rem}
+.l3-vita-info h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;
+  color:#5a4a38;margin-bottom:.2rem}
+.l3-vita-info p{font-size:.75rem;color:#a09080;line-height:1.5}
+
+/* L3 Kontakt */
+.l3-contact{padding:0 clamp(1.5rem,4vw,3.5rem) clamp(4rem,6vw,5rem);max-width:650px;margin:0 auto}
+.l3-contact-head{text-align:center;margin-bottom:2.5rem}
+.l3-contact-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:300}
+.l3-contact-head p{font-size:.85rem;color:#a09080;margin-top:.8rem}
+.l3-form input,.l3-form textarea{width:100%;padding:.85rem 1.2rem;border:none;
+  border-radius:12px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);
+  font-family:'DM Sans',sans-serif;font-size:.85rem;color:#3a3025;margin-bottom:1rem;
+  outline:none;box-shadow:0 2px 10px rgba(0,0,0,.04);transition:box-shadow .3s;
+  border:1px solid rgba(196,168,130,.1)}
+.l3-form input:focus,.l3-form textarea:focus{box-shadow:0 4px 20px rgba(196,168,130,.15);
+  border-color:rgba(196,168,130,.3)}
+.l3-form input::placeholder,.l3-form textarea::placeholder{color:#bba890}
+.l3-form textarea{height:130px;resize:vertical}
+.l3-form button{width:100%;padding:.85rem;border:none;border-radius:100px;
+  background:linear-gradient(135deg,#c4a882,#a08a68);color:#fff;font-size:.72rem;
+  letter-spacing:.08em;font-weight:600;cursor:pointer;transition:all .35s;
+  box-shadow:0 4px 18px rgba(196,168,130,.25)}
+.l3-form button:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,168,130,.35)}
+
+.l3-footer{border-top:1px solid rgba(0,0,0,.06);padding:2rem clamp(1.5rem,4vw,3.5rem);
+  text-align:center;font-size:.72rem;color:#bbb}
 
 /* ================================================================
    LAYOUT 4 - MINIMAL GRID
-   Weiss, Hairline-Borders, Schweizer Raster, nüchterne Eleganz
    ================================================================ */
 .l4{background:#fff;color:#111;font-family:'Inter',sans-serif}
 .l4-nav{display:flex;justify-content:space-between;align-items:center;
@@ -282,79 +386,112 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 
 .l4-hero{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #eee}
 .l4-hero-left{display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem);
-  border-right:1px solid #eee}
+  padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem);border-right:1px solid #eee}
 .l4-hero-left .l4-label{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
   color:#ccc;margin-bottom:1.2rem;font-weight:500}
-.l4-hero-left h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;
-  line-height:1.45;color:#333}
+.l4-hero-left h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;line-height:1.45;color:#333}
 .l4-hero-left h1 strong{font-weight:600;color:#111}
-.l4-hero-left p{font-size:.78rem;color:#bbb;margin-top:1rem;
-  max-width:380px;line-height:1.7}
-.l4-outline-btn{display:inline-flex;margin-top:1.5rem;padding:.55rem 1.4rem;
-  border:1px solid #ddd;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
-  color:#888;font-weight:500;transition:all .3s}
+.l4-hero-left p{font-size:.78rem;color:#bbb;margin-top:1rem;max-width:380px;line-height:1.7}
+.l4-outline-btn{display:inline-flex;margin-top:1.5rem;padding:.55rem 1.4rem;border:1px solid #ddd;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:500;transition:all .3s}
 .l4-outline-btn:hover{border-color:#111;color:#111}
 .l4-hero-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
-.l4-hero-grid .cell{overflow:hidden;border-bottom:1px solid #eee;
-  border-right:1px solid #eee;position:relative}
+.l4-hero-grid .cell{overflow:hidden;border-bottom:1px solid #eee;border-right:1px solid #eee;position:relative}
 .l4-hero-grid .cell:nth-child(2n){border-right:none}
 .l4-hero-grid .cell:nth-child(n+3){border-bottom:none}
-.l4-hero-grid .cell img{width:100%;height:100%;object-fit:cover;
-  aspect-ratio:1;transition:transform .6s ease}
+.l4-hero-grid .cell img{width:100%;height:100%;object-fit:cover;aspect-ratio:1;transition:transform .6s ease}
 .l4-hero-grid .cell:hover img{transform:scale(1.05)}
 
 .l4-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #eee}
-.l4-stat{padding:2.5rem;border-right:1px solid #eee;text-align:center;
-  transition:background .3s}
+.l4-stat{padding:2.5rem;border-right:1px solid #eee;text-align:center;transition:background .3s}
 .l4-stat:last-child{border-right:none}
 .l4-stat:hover{background:#faf8f5}
-.l4-stat .num{font-size:2.2rem;font-weight:300;color:#c4a882;
-  font-family:'Playfair Display',serif}
-.l4-stat .txt{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
-  color:#ccc;margin-top:.35rem;font-weight:500}
+.l4-stat .num{font-size:2.2rem;font-weight:300;color:#c4a882;font-family:'Playfair Display',serif}
+.l4-stat .txt{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#ccc;
+  margin-top:.35rem;font-weight:500}
 
 .l4-work{padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem)}
 .l4-work-head{display:flex;justify-content:space-between;align-items:flex-end;
   margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #eee}
 .l4-work-head h2{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:300;color:#333}
-.l4-work-head span{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
-  color:#ccc;font-weight:500}
-.l4-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  background:#eee;border:1px solid #eee}
+.l4-work-head span{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:#ccc;font-weight:500}
+.l4-work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#eee;border:1px solid #eee}
 .l4-work-cell{background:#fff;position:relative;overflow:hidden;aspect-ratio:3/4}
-.l4-work-cell img{width:100%;height:100%;object-fit:cover;
-  transition:transform .7s ease}
+.l4-work-cell img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
 .l4-work-cell:hover img{transform:scale(1.05)}
-.l4-work-overlay{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;padding:1.2rem;opacity:0;transition:opacity .3s;
+.l4-work-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.2rem;opacity:0;transition:opacity .3s;
   background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);color:#fff}
 .l4-work-cell:hover .l4-work-overlay{opacity:1}
 .l4-work-overlay h4{font-size:.82rem;font-weight:500}
-.l4-work-overlay p{font-size:.55rem;color:rgba(255,255,255,.5);margin-top:.1rem;
-  letter-spacing:.06em}
+.l4-work-overlay p{font-size:.55rem;color:rgba(255,255,255,.5);margin-top:.1rem;letter-spacing:.06em}
+
+/* L4 About */
+.l4-about{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #eee;border-bottom:1px solid #eee}
+.l4-about-img{overflow:hidden;border-right:1px solid #eee}
+.l4-about-img img{width:100%;height:100%;object-fit:cover;min-height:350px}
+.l4-about-text{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(2rem,4vw,3.5rem)}
+.l4-about-text .l4-label{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#ccc;margin-bottom:1rem;font-weight:500}
+.l4-about-text h3{font-size:clamp(1.2rem,2vw,1.6rem);font-weight:300;color:#333;
+  margin-bottom:1rem;line-height:1.4}
+.l4-about-text p{font-size:.78rem;color:#aaa;line-height:1.75}
+.l4-about-text blockquote{margin-top:1.5rem;padding-left:1rem;border-left:1px solid #ddd;
+  font-size:.82rem;color:#bbb;font-style:italic;line-height:1.5}
+
+/* L4 CV */
+.l4-cv{padding:clamp(3rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem)}
+.l4-cv-head{display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid #eee}
+.l4-cv-head h2{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:300;color:#333}
+.l4-cv-table{width:100%}
+.l4-cv-row{display:grid;grid-template-columns:100px 1fr;border-bottom:1px solid #f0f0f0;
+  padding:.9rem 0;transition:background .2s}
+.l4-cv-row:hover{background:#faf8f5}
+.l4-cv-row .year{font-size:.65rem;letter-spacing:.15em;color:#ccc;font-weight:500;padding-top:.1rem}
+.l4-cv-row .info{font-size:.78rem;color:#666}
+.l4-cv-row .info strong{color:#333;font-weight:500}
+
+/* L4 Contact */
+.l4-contact{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #eee}
+.l4-contact-left{padding:clamp(2rem,4vw,3.5rem);border-right:1px solid #eee}
+.l4-contact-left .l4-label{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#ccc;margin-bottom:1rem;font-weight:500}
+.l4-contact-left h2{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:300;color:#333;margin-bottom:1.5rem}
+.l4-form input,.l4-form textarea{width:100%;padding:.7rem 0;border:none;border-bottom:1px solid #eee;
+  font-family:'Inter',sans-serif;font-size:.78rem;color:#333;outline:none;
+  background:transparent;margin-bottom:.8rem;transition:border-color .3s}
+.l4-form input:focus,.l4-form textarea:focus{border-color:#c4a882}
+.l4-form input::placeholder,.l4-form textarea::placeholder{color:#ccc}
+.l4-form textarea{height:100px;resize:none}
+.l4-form button{margin-top:.5rem;padding:.6rem 1.6rem;border:1px solid #ddd;background:transparent;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:500;
+  cursor:pointer;transition:all .3s}
+.l4-form button:hover{border-color:#111;color:#111}
+.l4-contact-right{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(2rem,4vw,3.5rem)}
+.l4-contact-right .l4-label{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  color:#ccc;margin-bottom:1.5rem;font-weight:500}
+.l4-contact-right p{font-size:.78rem;color:#aaa;line-height:2}
 
 .l4-footer{border-top:1px solid #eee;padding:2rem clamp(1.5rem,4vw,3.5rem);
-  display:flex;justify-content:space-between;font-size:.62rem;color:#ccc;
-  letter-spacing:.06em}
+  display:flex;justify-content:space-between;font-size:.62rem;color:#ccc;letter-spacing:.06em}
 
 /* ================================================================
    LAYOUT 5 - DARK ATELIER
-   Dunkler Kinofilm-Look, Gold-Akzente, dramatische Tiefe
    ================================================================ */
 .l5{background:#0c0c0e;color:#e8e4df;font-family:'DM Sans',sans-serif}
 .l5-nav{display:flex;justify-content:space-between;align-items:center;
-  padding:1.5rem clamp(1.5rem,4vw,3.5rem);
-  border-bottom:1px solid rgba(255,255,255,.05)}
-.l5-logo{font-family:'Playfair Display',serif;font-size:1.2rem;
-  font-weight:400;font-style:italic;color:#c4a882}
+  padding:1.5rem clamp(1.5rem,4vw,3.5rem);border-bottom:1px solid rgba(255,255,255,.05)}
+.l5-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;
+  font-style:italic;color:#c4a882}
 .l5-links{display:flex;gap:2rem}
 .l5-links a{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
   color:rgba(255,255,255,.25);font-weight:400;transition:color .3s}
 .l5-links a:hover{color:#c4a882}
 
-.l5-hero{position:relative;min-height:calc(100vh - 100px);
-  display:flex;align-items:center;overflow:hidden}
+.l5-hero{position:relative;min-height:calc(100vh - 100px);display:flex;align-items:center;overflow:hidden}
 .l5-hero-bg{position:absolute;inset:0;z-index:0}
 .l5-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.25;filter:brightness(.5)}
 .l5-hero-bg::after{content:'';position:absolute;inset:0;
@@ -364,71 +501,218 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 .l5-hero-content .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
   letter-spacing:.4em;text-transform:uppercase;color:#c4a882;margin-bottom:1.5rem}
 .l5-hero-content h1{font-family:'Playfair Display',serif;
-  font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:400;line-height:1.1;
-  letter-spacing:-.02em}
+  font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:400;line-height:1.1;letter-spacing:-.02em}
 .l5-hero-content h1 em{color:#c4a882;font-style:italic}
-.l5-hero-content p{font-size:.85rem;color:rgba(255,255,255,.3);
-  margin-top:1.5rem;line-height:1.8;font-weight:300}
+.l5-hero-content p{font-size:.85rem;color:rgba(255,255,255,.3);margin-top:1.5rem;
+  line-height:1.8;font-weight:300}
 .l5-gold-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;
-  padding:.75rem 2rem;background:linear-gradient(135deg,#c4a882,#a08060);
-  color:#0c0c0e;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:700;transition:all .35s}
-.l5-gold-btn:hover{box-shadow:0 8px 35px rgba(196,168,130,.3);
-  transform:translateY(-2px)}
+  padding:.75rem 2rem;background:linear-gradient(135deg,#c4a882,#a08060);color:#0c0c0e;
+  font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;transition:all .35s}
+.l5-gold-btn:hover{box-shadow:0 8px 35px rgba(196,168,130,.3);transform:translateY(-2px)}
 
 .l5-gallery{display:grid;grid-template-columns:repeat(4,1fr);
   border-top:1px solid rgba(255,255,255,.05)}
-.l5-gal-item{position:relative;overflow:hidden;
-  border-right:1px solid rgba(255,255,255,.05)}
+.l5-gal-item{position:relative;overflow:hidden;border-right:1px solid rgba(255,255,255,.05)}
 .l5-gal-item:last-child{border-right:none}
 .l5-gal-item img{width:100%;aspect-ratio:3/4;object-fit:cover;
   filter:brightness(.75) saturate(.85);transition:all .6s ease}
 .l5-gal-item:hover img{filter:brightness(1) saturate(1);transform:scale(1.04)}
-.l5-gal-over{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;padding:1.4rem;
-  background:linear-gradient(to top,rgba(12,12,14,.85) 0%,transparent 45%);
+.l5-gal-over{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.4rem;background:linear-gradient(to top,rgba(12,12,14,.85) 0%,transparent 45%);
   opacity:0;transition:opacity .4s}
 .l5-gal-item:hover .l5-gal-over{opacity:1}
 .l5-gal-over h4{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:400}
 .l5-gal-over p{font-size:.58rem;color:#c4a882;letter-spacing:.12em;margin-top:.15rem}
 
-.l5-about{display:grid;grid-template-columns:1fr 1fr;
-  border-top:1px solid rgba(255,255,255,.05)}
+.l5-about{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.05)}
 .l5-about-img{overflow:hidden}
-.l5-about-img img{width:100%;height:100%;object-fit:cover;
-  filter:brightness(.8);min-height:400px}
-.l5-about-text{display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(2rem,5vw,4rem)}
+.l5-about-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.8);min-height:400px}
+.l5-about-text{display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,5vw,4rem)}
 .l5-about-text .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
   letter-spacing:.35em;text-transform:uppercase;color:#c4a882;margin-bottom:1rem}
-.l5-about-text h3{font-family:'Playfair Display',serif;
-  font-size:clamp(1.5rem,3vw,2.2rem);font-weight:400;margin-bottom:1.2rem;
-  line-height:1.2}
+.l5-about-text h3{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:400;margin-bottom:1.2rem;line-height:1.2}
 .l5-about-text p{font-size:.82rem;color:rgba(255,255,255,.3);line-height:1.8;font-weight:300}
-.l5-about-text blockquote{margin-top:1.5rem;padding-left:1.2rem;
-  border-left:2px solid #c4a882;font-family:'Playfair Display',serif;
-  font-style:italic;color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.5}
+.l5-about-text blockquote{margin-top:1.5rem;padding-left:1.2rem;border-left:2px solid #c4a882;
+  font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,.5);
+  font-size:.95rem;line-height:1.5}
+
+/* L5 Vita */
+.l5-vita{border-top:1px solid rgba(255,255,255,.05);
+  padding:clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3.5rem)}
+.l5-vita-head{margin-bottom:3rem}
+.l5-vita-head .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#c4a882}
+.l5-vita-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:400;margin-top:.5rem}
+.l5-vita-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:900px}
+.l5-vita-card{padding:1.5rem;border:1px solid rgba(255,255,255,.06);
+  border-left:3px solid #c4a882;transition:border-color .3s,background .3s}
+.l5-vita-card:hover{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.12)}
+.l5-vita-card .year{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;
+  color:#c4a882;margin-bottom:.5rem}
+.l5-vita-card h4{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:400;
+  margin-bottom:.3rem}
+.l5-vita-card p{font-size:.72rem;color:rgba(255,255,255,.25);line-height:1.5}
+
+/* L5 Kontakt */
+.l5-contact{border-top:1px solid rgba(255,255,255,.05);
+  display:grid;grid-template-columns:1fr 1fr}
+.l5-contact-left{padding:clamp(3rem,5vw,4rem);border-right:1px solid rgba(255,255,255,.05)}
+.l5-contact-left .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#c4a882;margin-bottom:1rem}
+.l5-contact-left h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:400;margin-bottom:1.5rem}
+.l5-form input,.l5-form textarea{width:100%;padding:.8rem 1rem;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);
+  font-family:'DM Sans',sans-serif;font-size:.82rem;color:#e8e4df;outline:none;
+  margin-bottom:1rem;transition:border-color .3s}
+.l5-form input:focus,.l5-form textarea:focus{border-color:#c4a882}
+.l5-form input::placeholder,.l5-form textarea::placeholder{color:rgba(255,255,255,.2)}
+.l5-form textarea{height:120px;resize:none}
+.l5-form button{padding:.75rem 2rem;background:linear-gradient(135deg,#c4a882,#a08060);
+  color:#0c0c0e;border:none;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;cursor:pointer;transition:all .35s}
+.l5-form button:hover{box-shadow:0 8px 30px rgba(196,168,130,.3);transform:translateY(-2px)}
+.l5-contact-right{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(3rem,5vw,4rem)}
+.l5-contact-right .kicker{font-family:'DM Mono',monospace;font-size:.55rem;
+  letter-spacing:.35em;text-transform:uppercase;color:#c4a882;margin-bottom:1.5rem}
+.l5-contact-right p{font-size:.78rem;color:rgba(255,255,255,.25);line-height:2.2}
+.l5-contact-right a{color:#c4a882;transition:opacity .3s}
+.l5-contact-right a:hover{opacity:.7}
 
 .l5-footer{border-top:1px solid rgba(255,255,255,.05);
   padding:2rem clamp(1.5rem,4vw,3.5rem);display:flex;justify-content:space-between;
   font-size:.62rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
 
 /* ================================================================
-   CTA BANNER (fixed bottom, shows on all layouts)
+   ADMIN CMS PREVIEW
+   ================================================================ */
+.l-admin{background:#1a1a2e;color:#e0e0e0;font-family:'Lato',system-ui,sans-serif}
+.adm-intro{text-align:center;padding:clamp(3rem,6vw,5rem) 2rem 2rem;max-width:700px;margin:0 auto}
+.adm-intro h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:300;margin-bottom:.8rem}
+.adm-intro h1 strong{color:#e94560;font-weight:700}
+.adm-intro p{font-size:.85rem;color:rgba(255,255,255,.4);line-height:1.7}
+.adm-tabs{display:flex;justify-content:center;gap:.5rem;padding:1.5rem 2rem;flex-wrap:wrap}
+.adm-tab{padding:.5rem 1.2rem;font-size:.65rem;letter-spacing:.08em;font-weight:600;
+  border-radius:6px;color:rgba(255,255,255,.4);transition:all .25s;text-transform:uppercase}
+.adm-tab:hover{color:#fff;background:rgba(255,255,255,.06)}
+.adm-tab.active{background:#e94560;color:#fff}
+.adm-screen{display:none;max-width:1100px;margin:0 auto;padding:0 2rem 3rem;animation:layoutFadeIn .4s ease}
+.adm-screen.active{display:block}
+
+/* Admin Dashboard Mockup */
+.adm-mockup{background:#16213e;border-radius:12px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06)}
+.adm-mock-bar{display:flex;align-items:center;gap:.5rem;padding:.6rem 1rem;
+  background:rgba(0,0,0,.2);border-bottom:1px solid rgba(255,255,255,.05)}
+.adm-mock-dot{width:10px;height:10px;border-radius:50%}
+.adm-mock-dot.r{background:#ff5f57}.adm-mock-dot.y{background:#ffbd2e}.adm-mock-dot.g{background:#28c840}
+.adm-mock-bar span{font-size:.6rem;color:rgba(255,255,255,.3);margin-left:.5rem}
+.adm-mock-layout{display:grid;grid-template-columns:200px 1fr;min-height:450px}
+
+/* Admin Sidebar Mockup */
+.adm-mock-sidebar{background:rgba(0,0,0,.15);padding:1.5rem 0;
+  border-right:1px solid rgba(255,255,255,.05)}
+.adm-mock-sidebar-logo{padding:0 1.2rem 1.5rem;font-size:.75rem;font-weight:700;
+  color:#e94560;letter-spacing:.05em}
+.adm-mock-nav a{display:flex;align-items:center;gap:.6rem;padding:.6rem 1.2rem;
+  font-size:.72rem;color:rgba(255,255,255,.35);transition:all .2s}
+.adm-mock-nav a:hover,.adm-mock-nav a.act{color:#fff;background:rgba(233,69,96,.12)}
+.adm-mock-nav a.act{border-left:3px solid #e94560}
+.adm-mock-nav-icon{width:16px;height:16px;opacity:.5}
+
+/* Admin Main Area Mockup */
+.adm-mock-main{padding:1.5rem}
+.adm-mock-topbar{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.05)}
+.adm-mock-topbar h3{font-size:.95rem;font-weight:400}
+.adm-mock-topbar .badge{font-size:.55rem;padding:.3rem .7rem;background:rgba(233,69,96,.15);
+  color:#e94560;border-radius:20px;font-weight:600}
+.adm-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.5rem}
+.adm-stat-card{background:rgba(15,52,96,.5);border-radius:8px;padding:1rem;
+  border:1px solid rgba(255,255,255,.05);text-align:center;transition:transform .2s}
+.adm-stat-card:hover{transform:translateY(-3px)}
+.adm-stat-card .icon{font-size:1.3rem;margin-bottom:.3rem}
+.adm-stat-card .val{font-size:1.5rem;font-weight:700;color:#fff}
+.adm-stat-card .lbl{font-size:.55rem;color:rgba(255,255,255,.35);text-transform:uppercase;
+  letter-spacing:.12em;margin-top:.15rem}
+.adm-activity{background:rgba(15,52,96,.3);border-radius:8px;padding:1.2rem;
+  border:1px solid rgba(255,255,255,.05)}
+.adm-activity h4{font-size:.72rem;font-weight:600;margin-bottom:1rem;
+  text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5)}
+.adm-activity-item{display:flex;justify-content:space-between;align-items:center;
+  padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.adm-activity-item:last-child{border-bottom:none}
+.adm-activity-item span{font-size:.72rem;color:rgba(255,255,255,.5)}
+.adm-activity-item .time{font-size:.6rem;color:rgba(255,255,255,.2)}
+
+/* Admin Page Editor Mockup */
+.adm-editor-mock{display:grid;grid-template-columns:1fr 280px;gap:1rem;min-height:380px}
+.adm-editor-main{background:rgba(15,52,96,.3);border-radius:8px;padding:1.2rem;
+  border:1px solid rgba(255,255,255,.05)}
+.adm-editor-label{font-size:.55rem;text-transform:uppercase;letter-spacing:.15em;
+  color:rgba(255,255,255,.3);margin-bottom:.5rem;display:block}
+.adm-editor-input{width:100%;padding:.6rem .8rem;background:rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.08);border-radius:6px;color:#e0e0e0;
+  font-size:.82rem;margin-bottom:1rem;font-family:'Lato',sans-serif;outline:none}
+.adm-editor-textarea{width:100%;height:180px;padding:.8rem;background:rgba(0,0,0,.2);
+  border:1px solid rgba(255,255,255,.08);border-radius:6px;color:rgba(255,255,255,.6);
+  font-size:.75rem;font-family:'DM Mono',monospace;line-height:1.7;resize:none;outline:none}
+.adm-editor-sidebar{display:flex;flex-direction:column;gap:.8rem}
+.adm-editor-card{background:rgba(15,52,96,.3);border-radius:8px;padding:1rem;
+  border:1px solid rgba(255,255,255,.05)}
+.adm-editor-card h4{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;
+  color:rgba(255,255,255,.4);margin-bottom:.8rem}
+.adm-editor-img-placeholder{width:100%;aspect-ratio:16/10;background:rgba(0,0,0,.2);
+  border-radius:6px;display:flex;align-items:center;justify-content:center;
+  border:2px dashed rgba(255,255,255,.08);color:rgba(255,255,255,.2);font-size:.7rem}
+.adm-editor-btn{width:100%;padding:.55rem;background:#e94560;color:#fff;border:none;
+  border-radius:6px;font-size:.65rem;font-weight:600;letter-spacing:.06em;cursor:pointer;
+  margin-top:.8rem;transition:background .2s}
+.adm-editor-btn:hover{background:#d63a54}
+
+/* Admin Gallery Mockup */
+.adm-gal-toolbar{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.2rem}
+.adm-gal-toolbar h3{font-size:.85rem;font-weight:400}
+.adm-gal-upload-btn{padding:.5rem 1rem;background:#e94560;color:#fff;border-radius:6px;
+  font-size:.6rem;font-weight:600;letter-spacing:.06em;cursor:pointer;transition:background .2s}
+.adm-gal-upload-btn:hover{background:#d63a54}
+.adm-gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.adm-gal-card{background:rgba(15,52,96,.3);border-radius:8px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.05);transition:transform .2s}
+.adm-gal-card:hover{transform:translateY(-3px)}
+.adm-gal-card img{width:100%;aspect-ratio:1;object-fit:cover;filter:brightness(.85)}
+.adm-gal-card-info{padding:.6rem .8rem}
+.adm-gal-card-info h5{font-size:.7rem;font-weight:500;margin-bottom:.15rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-gal-card-info p{font-size:.55rem;color:rgba(255,255,255,.3)}
+.adm-gal-card-actions{display:flex;gap:.4rem;padding:0 .8rem .6rem}
+.adm-gal-card-actions button{padding:.25rem .6rem;font-size:.5rem;border-radius:4px;
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:background .2s;
+  cursor:pointer}
+.adm-gal-card-actions .edit-btn{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);border:none}
+.adm-gal-card-actions .edit-btn:hover{background:rgba(255,255,255,.15)}
+.adm-gal-card-actions .del-btn{background:rgba(233,69,96,.15);color:#e94560;border:none}
+.adm-gal-card-actions .del-btn:hover{background:rgba(233,69,96,.3)}
+
+.adm-footer-note{text-align:center;padding:2rem;font-size:.72rem;color:rgba(255,255,255,.2)}
+
+/* ================================================================
+   CTA BANNER
    ================================================================ */
 .cta-bar{position:fixed;bottom:0;left:0;right:0;z-index:9998;
   padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;
   background:rgba(26,26,26,.92);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-top:1px solid rgba(255,255,255,.06);
-  transform:translateY(100%);transition:transform .5s cubic-bezier(.25,.46,.45,.94);
-  flex-wrap:wrap}
+  -webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.06);
+  transform:translateY(100%);transition:transform .5s cubic-bezier(.25,.46,.45,.94);flex-wrap:wrap}
 .cta-bar.show{transform:translateY(0)}
 .cta-bar p{font-size:.72rem;color:rgba(255,255,255,.5);font-weight:300}
 .cta-bar p strong{color:#fff;font-weight:500}
-.cta-bar a{padding:.45rem 1.3rem;background:#c4a882;color:#0c0c0e;
-  font-size:.62rem;letter-spacing:.08em;font-weight:600;border-radius:6px;
-  transition:all .25s;flex-shrink:0}
+.cta-bar a{padding:.45rem 1.3rem;background:#c4a882;color:#0c0c0e;font-size:.62rem;
+  letter-spacing:.08em;font-weight:600;border-radius:6px;transition:all .25s;flex-shrink:0}
 .cta-bar a:hover{background:#e0c8a8;transform:translateY(-1px)}
 .cta-close{color:rgba(255,255,255,.3);font-size:1rem;padding:.2rem .4rem;
   transition:color .2s;flex-shrink:0}
@@ -438,15 +722,23 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
    RESPONSIVE
    ================================================================ */
 @media(max-width:900px){
-  .l1-hero,.l1-about,.l3-hero,.l4-hero,.l5-about{grid-template-columns:1fr}
+  .l1-hero,.l1-about,.l3-hero,.l3-about,.l4-hero,.l4-about,.l4-contact,
+  .l5-about,.l5-contact{grid-template-columns:1fr}
   .l1-hero-text{padding:3rem 0 2rem}
   .l1-hero-img{max-height:50vh}
   .l1-gallery{grid-template-columns:1fr 1fr}
+  .l1-vita-item{grid-template-columns:80px 1fr;gap:1.5rem}
+  .l1-vita-item::before{left:95px}
+  .l1-vita-item::after{left:91px}
   .l2-grid{grid-template-columns:1fr 1fr}
   .l2-grid-item:last-child{grid-column:span 2;border-top:3px solid #111}
+  .l2-about{grid-template-columns:1fr}
+  .l2-about-img{border-right:none;border-bottom:3px solid #111;max-height:350px}
   .l2-info{grid-template-columns:1fr 1fr}
   .l2-info-item:nth-child(2){border-right:none}
   .l2-info-item:nth-child(3){border-right:3px solid #111}
+  .l2-form{grid-template-columns:1fr}
+  .l2-form textarea,.l2-form button{grid-column:span 1}
   .l3-hero-imgs{grid-template-columns:1fr}
   .l3-hero-imgs .img-card:nth-child(2){margin-top:0}
   .l3-features{grid-template-columns:1fr}
@@ -456,18 +748,30 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   .l4-stat:nth-child(2){border-right:none}
   .l4-stat:nth-child(3){border-right:1px solid #eee}
   .l4-work-grid{grid-template-columns:1fr 1fr}
+  .l4-contact-left{border-right:none;border-bottom:1px solid #eee}
   .l5-gallery{grid-template-columns:1fr 1fr}
   .l5-gal-item:nth-child(2){border-right:none}
   .l5-gal-item:nth-child(3){border-right:1px solid rgba(255,255,255,.05)}
+  .l5-vita-grid{grid-template-columns:1fr}
+  .l5-contact-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
   .switcher{gap:.15rem;padding:.5rem .6rem;flex-wrap:wrap}
   .switcher-label{display:none}
   .sw-btn{padding:.35rem .55rem;font-size:.55rem}
+  .adm-mock-layout{grid-template-columns:1fr}
+  .adm-mock-sidebar{display:none}
+  .adm-stats-row{grid-template-columns:1fr 1fr}
+  .adm-editor-mock{grid-template-columns:1fr}
+  .adm-gal-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
   .l1-gallery{grid-template-columns:1fr}
+  .l1-vita-item{grid-template-columns:1fr}
+  .l1-vita-item::before,.l1-vita-item::after{display:none}
   .l2-grid{grid-template-columns:1fr}
   .l2-grid-item{border-right:none;border-bottom:3px solid #111}
   .l2-grid-item:last-child{grid-column:span 1;border-bottom:none}
+  .l2-vita-item{flex-direction:column}
+  .l2-vita-year{border-right:none;border-bottom:3px solid #111}
   .l3-masonry{column-count:1}
   .l4-hero-grid{grid-template-columns:1fr}
   .l4-hero-grid .cell{border-right:none;border-bottom:1px solid #eee}
@@ -478,6 +782,8 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   .l5-gal-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
   .l5-gal-item:last-child{border-bottom:none}
   .l1-links,.l2-links,.l3-links,.l4-links,.l5-links{display:none}
+  .adm-stats-row{grid-template-columns:1fr}
+  .adm-gal-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -493,6 +799,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   <button class="sw-btn" data-layout="l3">Organic</button>
   <button class="sw-btn" data-layout="l4">Minimal</button>
   <button class="sw-btn" data-layout="l5">Dark</button>
+  <button class="sw-btn" data-layout="ladmin">Admin CMS</button>
   <a class="sw-gh" href="https://github.com/crorry-dev/example_website_with_cms" target="_blank">
     <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
     GitHub
@@ -507,46 +814,129 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
   <nav class="l1-nav">
     <div class="l1-logo">Dein Name</div>
     <div class="l1-links">
-      <a href="#">Portfolio</a><a href="#">Über mich</a><a href="#">Vita</a><a href="#">Kontakt</a>
+      <a href="#l1-portfolio">Portfolio</a>
+      <a href="#l1-about">Ueber mich</a>
+      <a href="#l1-vita">Vita</a>
+      <a href="#l1-contact">Kontakt</a>
     </div>
   </nav>
+
+  <!-- Hero -->
   <div class="l1-hero">
     <div class="l1-hero-text">
       <div class="kicker">Freie Kunst | Portfolio</div>
       <h1>Wo die<br><em>Stille</em><br>sichtbar wird.</h1>
-      <p>Arbeiten in Malerei und Mixed Media. Studium der Freien Kunst.</p>
-      <a href="#" class="l1-btn">Portfolio ansehen</a>
+      <p>Arbeiten in Malerei und Mixed Media. Studium der Freien Kunst - zwischen Figuration und Abstraktion.</p>
+      <a href="#l1-portfolio" class="l1-btn">Portfolio ansehen</a>
     </div>
     <div class="l1-hero-img">
       <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&h=1100&fit=crop&q=80" alt="Kunst" loading="lazy">
     </div>
   </div>
-  <div class="l1-section-head"><div class="kicker">Ausgewählte Werke</div><h2>Portfolio</h2></div>
-  <div class="l1-gallery">
-    <div class="l1-gal-item">
-      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=800&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l1-gal-cap"><h4>Fragmente der Stille</h4><p>Öl auf Leinwand, 120 x 80 cm</p></div>
-    </div>
-    <div class="l1-gal-item">
-      <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=800&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l1-gal-cap"><h4>Urbane Reflexionen</h4><p>Acryl &amp; Mixed Media</p></div>
-    </div>
-    <div class="l1-gal-item">
-      <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=800&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l1-gal-cap"><h4>Lichtstudie III</h4><p>Aquarell auf Papier</p></div>
+
+  <!-- Portfolio -->
+  <div id="l1-portfolio">
+    <div class="l1-section-head reveal"><div class="kicker">Ausgewaehlte Werke</div><h2>Portfolio</h2></div>
+    <div class="l1-gallery">
+      <div class="l1-gal-item reveal">
+        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=800&fit=crop&q=80" alt="Fragmente der Stille" loading="lazy">
+        <div class="l1-gal-cap"><h4>Fragmente der Stille</h4><p>Oel auf Leinwand, 120 x 80 cm</p></div>
+      </div>
+      <div class="l1-gal-item reveal">
+        <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=800&fit=crop&q=80" alt="Urbane Reflexionen" loading="lazy">
+        <div class="l1-gal-cap"><h4>Urbane Reflexionen</h4><p>Acryl &amp; Mixed Media, 100 x 100 cm</p></div>
+      </div>
+      <div class="l1-gal-item reveal">
+        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=800&fit=crop&q=80" alt="Lichtstudie III" loading="lazy">
+        <div class="l1-gal-cap"><h4>Lichtstudie III</h4><p>Aquarell auf Papier, 50 x 70 cm</p></div>
+      </div>
+      <div class="l1-gal-item reveal">
+        <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=600&h=800&fit=crop&q=80" alt="Horizont" loading="lazy">
+        <div class="l1-gal-cap"><h4>Horizont</h4><p>Mischtechnik auf Holz, 80 x 60 cm</p></div>
+      </div>
+      <div class="l1-gal-item reveal">
+        <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=800&fit=crop&q=80" alt="Materie" loading="lazy">
+        <div class="l1-gal-cap"><h4>Materie</h4><p>Skulptur, Ton &amp; Pigment</p></div>
+      </div>
+      <div class="l1-gal-item reveal">
+        <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=600&h=800&fit=crop&q=80" alt="Abstraktion IX" loading="lazy">
+        <div class="l1-gal-cap"><h4>Abstraktion IX</h4><p>Oel auf Leinwand, 150 x 120 cm</p></div>
+      </div>
     </div>
   </div>
-  <div class="l1-about">
-    <div class="l1-about-img">
-      <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&h=900&fit=crop&q=80" alt="" loading="lazy">
-    </div>
-    <div class="l1-about-text">
-      <div class="kicker">Über mich</div>
-      <h3>Kunst als Prozess des Verstehens.</h3>
-      <p>Meine Praxis bewegt sich an der Schnittstelle von Malerei, Installation und digitaler Kunst.</p>
-      <blockquote>„Kunst ist für mich kein Produkt, sondern ein Prozess des Verstehens."</blockquote>
+
+  <!-- Ueber mich -->
+  <div id="l1-about">
+    <div class="l1-section-head reveal"><div class="kicker">Kuenstlerisches Profil</div><h2>Ueber mich</h2></div>
+    <div class="l1-about reveal">
+      <div class="l1-about-img reveal-left">
+        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&h=900&fit=crop&q=80" alt="Atelier" loading="lazy">
+      </div>
+      <div class="l1-about-text reveal-right">
+        <div class="kicker">Ueber mich</div>
+        <h3>Kunst als Prozess des Verstehens.</h3>
+        <p>Meine Praxis bewegt sich an der Schnittstelle von Malerei, Installation und digitaler Kunst. Im Zentrum steht die Auseinandersetzung mit Raum, Licht und Materialitaet - ein fortlaufender Dialog zwischen dem Sichtbaren und dem, was sich erst im Betrachten entfaltet.</p>
+        <p style="margin-top:1rem">Ich studiere Freie Kunst und arbeite interdisziplinaer mit Pigmenten, Textilien und digitalen Medien.</p>
+        <blockquote>Kunst ist fuer mich kein Produkt, sondern ein Prozess des Verstehens.</blockquote>
+      </div>
     </div>
   </div>
+
+  <!-- Vita -->
+  <div id="l1-vita">
+    <div class="l1-section-head reveal"><div class="kicker">Lebenslauf</div><h2>Vita</h2></div>
+    <div class="l1-vita">
+      <div class="l1-vita-item reveal">
+        <div class="l1-vita-year">2026</div>
+        <div class="l1-vita-info"><h4>Einzelausstellung "Zwischenraeume"</h4><p>Galerie am Markt, Gruppenausstellung mit 3 Positionen</p></div>
+      </div>
+      <div class="l1-vita-item reveal">
+        <div class="l1-vita-year">2025</div>
+        <div class="l1-vita-info"><h4>Gruppenausstellung "Neue Positionen"</h4><p>Kunstverein, kuratiert von Prof. Dr. Schneider</p></div>
+      </div>
+      <div class="l1-vita-item reveal">
+        <div class="l1-vita-year">2025</div>
+        <div class="l1-vita-info"><h4>Arbeitsstipendium</h4><p>Kunststiftung, Foerderprogramm fuer junge Kunst</p></div>
+      </div>
+      <div class="l1-vita-item reveal">
+        <div class="l1-vita-year">2024</div>
+        <div class="l1-vita-info"><h4>Semesterausstellung</h4><p>Fakultaet Kunst und Gestaltung, Jahresrundgang</p></div>
+      </div>
+      <div class="l1-vita-item reveal">
+        <div class="l1-vita-year">2023</div>
+        <div class="l1-vita-info"><h4>Workshop "Experimentelle Druckgrafik"</h4><p>Sommerakademie fuer Bildende Kunst</p></div>
+      </div>
+      <div class="l1-vita-item reveal">
+        <div class="l1-vita-year">2022</div>
+        <div class="l1-vita-info"><h4>Beginn Studium Freie Kunst</h4><p>Schwerpunkt Malerei und Installation</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kontakt -->
+  <div id="l1-contact">
+    <div class="l1-section-head reveal"><div class="kicker">Schreib mir</div><h2>Kontakt</h2></div>
+    <div class="l1-contact reveal">
+      <div class="l1-contact-text">
+        <p>Interesse an einer Zusammenarbeit, einer Ausstellung oder einfach ein Gespraech ueber Kunst? Ich freue mich auf deine Nachricht.</p>
+      </div>
+      <form class="l1-form" onsubmit="event.preventDefault()">
+        <label>Name</label>
+        <input type="text" placeholder="Dein Name">
+        <label>E-Mail</label>
+        <input type="email" placeholder="deine@email.de">
+        <label>Nachricht</label>
+        <textarea placeholder="Deine Nachricht..."></textarea>
+        <button type="submit">Nachricht senden</button>
+      </form>
+      <div class="l1-contact-info">
+        <span><a href="#">Instagram</a></span>
+        <span><a href="#">Behance</a></span>
+        <span><a href="mailto:deinname@email.de">deinname@email.de</a></span>
+      </div>
+    </div>
+  </div>
+
   <footer class="l1-footer"><span>2026 Dein Name</span><span>Impressum / Datenschutz</span></footer>
 </div>
 
@@ -557,39 +947,114 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 <div class="layout l2" id="l2">
   <nav class="l2-nav">
     <div class="l2-logo">Mein Studio</div>
-    <div class="l2-links"><a href="#">Arbeiten</a><a href="#">Info</a><a href="#">Kontakt</a></div>
+    <div class="l2-links">
+      <a href="#l2-works">Arbeiten</a>
+      <a href="#l2-about">Info</a>
+      <a href="#l2-vita">Vita</a>
+      <a href="#l2-contact">Kontakt</a>
+    </div>
   </nav>
+
+  <!-- Hero -->
   <div class="l2-hero">
     <h1>Dein<br>Name<br><span class="accent">Studio</span></h1>
     <div class="l2-hero-row">
-      <p>Malerei, Installation und digitale Arbeiten. Dein Studium, 2022 - heute.</p>
-      <a href="#" class="l2-hero-btn">Alle Arbeiten ansehen</a>
+      <p>Malerei, Installation und digitale Arbeiten. Studium der Freien Kunst, 2022 - heute. Kompromisslos. Direkt. Echt.</p>
+      <a href="#l2-works" class="l2-hero-btn">Alle Arbeiten ansehen</a>
     </div>
   </div>
-  <div class="l2-grid">
-    <div class="l2-grid-item">
-      <img src="https://images.unsplash.com/photo-1531913764164-f85c3e01b2aa?w=600&h=900&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l2-grid-meta"><span>Fragmente</span><span>2024</span></div>
-    </div>
-    <div class="l2-grid-item">
-      <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=600&h=900&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l2-grid-meta"><span>Abstraktion VII</span><span>2026</span></div>
-    </div>
-    <div class="l2-grid-item">
-      <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=600&h=900&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l2-grid-meta"><span>Horizont</span><span>2026</span></div>
+
+  <!-- Arbeiten -->
+  <div id="l2-works">
+    <div class="l2-grid">
+      <div class="l2-grid-item">
+        <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=900&fit=crop&q=80" alt="Fragmente" loading="lazy">
+        <div class="l2-grid-meta"><span>Fragmente</span><span>2024</span></div>
+      </div>
+      <div class="l2-grid-item">
+        <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=600&h=900&fit=crop&q=80" alt="Abstraktion VII" loading="lazy">
+        <div class="l2-grid-meta"><span>Abstraktion VII</span><span>2025</span></div>
+      </div>
+      <div class="l2-grid-item">
+        <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=600&h=900&fit=crop&q=80" alt="Horizont" loading="lazy">
+        <div class="l2-grid-meta"><span>Horizont</span><span>2026</span></div>
+      </div>
     </div>
   </div>
-  <div class="l2-manifesto">
-    <blockquote>Kunst braucht keine <span>Erklärung</span>. Sie braucht <span>Raum</span>.</blockquote>
+
+  <!-- Manifesto -->
+  <div class="l2-manifesto reveal">
+    <blockquote>Kunst braucht keine <span>Erklaerung</span>. Sie braucht <span>Raum</span>.</blockquote>
     <cite>Dein Name, 2026</cite>
   </div>
-  <div class="l2-info">
+
+  <!-- About -->
+  <div id="l2-about">
+    <div class="l2-about reveal">
+      <div class="l2-about-img">
+        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=700&h=500&fit=crop&q=80" alt="Studio" loading="lazy">
+      </div>
+      <div class="l2-about-text">
+        <div class="tag">Ueber mich</div>
+        <h3>Keine Kompromisse. Nur Kunst.</h3>
+        <p>Ich arbeite mit Malerei, Installation und digitalen Medien. Mein Ansatz ist direkt, roh und ungeschliffen. Die Arbeit entsteht aus dem Material selbst - aus dem Widerstand der Oberflaeche, dem Zufall der Geste, der Konsequenz des Prozesses.</p>
+        <p style="margin-top:1rem">Studium der Freien Kunst. Schwerpunkt: Malerei und raumbezogene Installation. Mitglied im Kunstverein seit 2024.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="l2-info reveal">
     <div class="l2-info-item"><div class="num">24</div><div class="label">Werke</div></div>
     <div class="l2-info-item"><div class="num">06</div><div class="label">Ausstellungen</div></div>
     <div class="l2-info-item"><div class="num">03</div><div class="label">Stipendien</div></div>
     <div class="l2-info-item"><div class="num">01</div><div class="label">Preis</div></div>
   </div>
+
+  <!-- Vita -->
+  <div id="l2-vita">
+    <div class="l2-vita reveal">
+      <div class="l2-vita-item">
+        <div class="l2-vita-year">2026</div>
+        <div class="l2-vita-content"><h4>Einzelausstellung "Zwischenraeume"</h4><p>Galerie am Markt</p></div>
+      </div>
+      <div class="l2-vita-item">
+        <div class="l2-vita-year">2025</div>
+        <div class="l2-vita-content"><h4>Gruppenausstellung "Neue Positionen"</h4><p>Kunstverein</p></div>
+      </div>
+      <div class="l2-vita-item">
+        <div class="l2-vita-year">2025</div>
+        <div class="l2-vita-content"><h4>Arbeitsstipendium Kunststiftung</h4><p>Foerderprogramm junge Kunst</p></div>
+      </div>
+      <div class="l2-vita-item">
+        <div class="l2-vita-year">2024</div>
+        <div class="l2-vita-content"><h4>Semesterausstellung</h4><p>Jahresrundgang Kunst &amp; Gestaltung</p></div>
+      </div>
+      <div class="l2-vita-item">
+        <div class="l2-vita-year">2022</div>
+        <div class="l2-vita-content"><h4>Beginn Studium Freie Kunst</h4><p>Schwerpunkt Malerei</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kontakt -->
+  <div id="l2-contact">
+    <div class="l2-contact reveal">
+      <h2>Kontakt</h2>
+      <form class="l2-form" onsubmit="event.preventDefault()">
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="E-Mail">
+        <textarea placeholder="Nachricht"></textarea>
+        <button type="submit">Absenden</button>
+      </form>
+      <div class="l2-contact-info">
+        <span>deinname@email.de</span>
+        <span>Instagram</span>
+        <span>Behance</span>
+      </div>
+    </div>
+  </div>
+
   <footer class="l2-footer"><span>2026 Dein Studio</span><span>Impressum</span></footer>
 </div>
 
@@ -600,33 +1065,110 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 <div class="layout l3" id="l3">
   <nav class="l3-nav">
     <div class="l3-logo">Dein Name</div>
-    <div class="l3-links"><a href="#">Arbeiten</a><a href="#">Über mich</a><a href="#">Kontakt</a></div>
+    <div class="l3-links">
+      <a href="#l3-portfolio">Arbeiten</a>
+      <a href="#l3-about">Ueber mich</a>
+      <a href="#l3-vita">Vita</a>
+      <a href="#l3-contact">Kontakt</a>
+    </div>
   </nav>
+
+  <!-- Hero -->
   <div class="l3-hero">
     <div class="l3-hero-text">
       <h1>Kunst als<br><em>Prozess</em> des<br>Verstehens.</h1>
-      <p>Arbeiten an der Schnittstelle von Malerei, Installation und digitaler Kunst.</p>
-      <a href="#" class="l3-btn">Entdecken</a>
+      <p>Arbeiten an der Schnittstelle von Malerei, Installation und digitaler Kunst. Organisch gewachsen, intuitiv gestaltet.</p>
+      <a href="#l3-portfolio" class="l3-btn">Entdecken</a>
     </div>
     <div class="l3-hero-imgs">
       <div class="img-card"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&h=660&fit=crop&q=80" alt="" loading="lazy"></div>
       <div class="img-card"><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=500&h=660&fit=crop&q=80" alt="" loading="lazy"></div>
     </div>
   </div>
-  <div class="l3-features">
-    <div class="l3-feat"><h4>Malerei</h4><p>Öl und Acryl auf Leinwand. Gestische Abstraktion und Farbstudien mit expressivem Duktus.</p></div>
+
+  <!-- Disziplinen -->
+  <div class="l3-features reveal">
+    <div class="l3-feat"><h4>Malerei</h4><p>Oel und Acryl auf Leinwand. Gestische Abstraktion und Farbstudien mit expressivem Duktus.</p></div>
     <div class="l3-feat"><h4>Installation</h4><p>Raumgreifende Arbeiten mit Licht, Stoff und gefundenen Materialien im Dialog mit dem Ort.</p></div>
     <div class="l3-feat"><h4>Digitale Kunst</h4><p>Generative Grafiken und interaktive Arbeiten an der Schnittstelle von Code und Bild.</p></div>
   </div>
-  <div class="l3-gallery-head"><div class="kicker">Ausgewählte Arbeiten</div><h2>Portfolio</h2></div>
-  <div class="l3-masonry">
-    <div class="m-item"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=700&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Fragmente</h4><p>Öl auf Leinwand</p></div></div>
-    <div class="m-item"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=500&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Reflexionen</h4><p>Acryl &amp; Mixed Media</p></div></div>
-    <div class="m-item"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&h=750&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Lichtstudie</h4><p>Aquarell</p></div></div>
-    <div class="m-item"><img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=500&h=550&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Horizont</h4><p>Mischtechnik</p></div></div>
-    <div class="m-item"><img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=500&h=680&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Materie</h4><p>Skulptur</p></div></div>
-    <div class="m-item"><img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=500&h=500&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Abstraktion</h4><p>Öl auf Leinwand</p></div></div>
+
+  <!-- Portfolio -->
+  <div id="l3-portfolio">
+    <div class="l3-gallery-head reveal"><div class="kicker">Ausgewaehlte Arbeiten</div><h2>Portfolio</h2></div>
+    <div class="l3-masonry">
+      <div class="m-item reveal-scale"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=700&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Fragmente</h4><p>Oel auf Leinwand</p></div></div>
+      <div class="m-item reveal-scale"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=500&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Reflexionen</h4><p>Acryl &amp; Mixed Media</p></div></div>
+      <div class="m-item reveal-scale"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&h=750&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Lichtstudie</h4><p>Aquarell</p></div></div>
+      <div class="m-item reveal-scale"><img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=500&h=550&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Horizont</h4><p>Mischtechnik</p></div></div>
+      <div class="m-item reveal-scale"><img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=500&h=680&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Materie</h4><p>Skulptur</p></div></div>
+      <div class="m-item reveal-scale"><img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=500&h=500&fit=crop&q=80" alt="" loading="lazy"><div class="l3-m-cap"><h4>Abstraktion</h4><p>Oel auf Leinwand</p></div></div>
+    </div>
   </div>
+
+  <!-- Ueber mich -->
+  <div id="l3-about">
+    <div class="l3-gallery-head reveal"><div class="kicker">Kuenstlerisches Profil</div><h2>Ueber mich</h2></div>
+    <div class="l3-about reveal">
+      <div class="l3-about-img reveal-left">
+        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=750&fit=crop&q=80" alt="Atelier" loading="lazy">
+      </div>
+      <div class="l3-about-text reveal-right">
+        <div class="kicker">Ueber mich</div>
+        <h3>Zwischen Intuition und Struktur.</h3>
+        <p>Meine Arbeit entsteht aus dem Dialog zwischen Material und Idee. Jedes Werk ist ein Prozess - organisch gewachsen, offen fuer den Zufall und doch mit klarer Intention. Ich arbeite bevorzugt mit natuerlichen Pigmenten, Textilien und gefundenen Materialien.</p>
+        <blockquote>Jede Leinwand ist ein Gespraech, das ich noch nicht kenne.</blockquote>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vita -->
+  <div id="l3-vita">
+    <div class="l3-gallery-head reveal"><div class="kicker">Lebenslauf</div><h2>Vita</h2></div>
+    <div class="l3-vita">
+      <div class="l3-vita-item reveal">
+        <div class="l3-vita-year">2026</div>
+        <div class="l3-vita-info"><h4>Einzelausstellung "Zwischenraeume"</h4><p>Galerie am Markt</p></div>
+      </div>
+      <div class="l3-vita-item reveal">
+        <div class="l3-vita-year">2025</div>
+        <div class="l3-vita-info"><h4>Gruppenausstellung "Neue Positionen"</h4><p>Kunstverein</p></div>
+      </div>
+      <div class="l3-vita-item reveal">
+        <div class="l3-vita-year">2025</div>
+        <div class="l3-vita-info"><h4>Arbeitsstipendium Kunststiftung</h4><p>Foerderprogramm junge Kunst</p></div>
+      </div>
+      <div class="l3-vita-item reveal">
+        <div class="l3-vita-year">2024</div>
+        <div class="l3-vita-info"><h4>Semesterausstellung</h4><p>Jahresrundgang Kunst &amp; Gestaltung</p></div>
+      </div>
+      <div class="l3-vita-item reveal">
+        <div class="l3-vita-year">2023</div>
+        <div class="l3-vita-info"><h4>Workshop Experimentelle Druckgrafik</h4><p>Sommerakademie Bildende Kunst</p></div>
+      </div>
+      <div class="l3-vita-item reveal">
+        <div class="l3-vita-year">2022</div>
+        <div class="l3-vita-info"><h4>Beginn Studium Freie Kunst</h4><p>Schwerpunkt Malerei und Installation</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kontakt -->
+  <div id="l3-contact">
+    <div class="l3-contact reveal">
+      <div class="l3-contact-head">
+        <h2>Kontakt</h2>
+        <p>Lass uns ins Gespraech kommen - ueber Kunst, Projekte oder Zusammenarbeit.</p>
+      </div>
+      <form class="l3-form" onsubmit="event.preventDefault()">
+        <input type="text" placeholder="Dein Name">
+        <input type="email" placeholder="Deine E-Mail">
+        <textarea placeholder="Deine Nachricht..."></textarea>
+        <button type="submit">Nachricht senden</button>
+      </form>
+    </div>
+  </div>
+
   <footer class="l3-footer">2026 Dein Name / Kunst &amp; Installation</footer>
 </div>
 
@@ -637,14 +1179,21 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 <div class="layout l4" id="l4">
   <nav class="l4-nav">
     <div class="l4-logo">Dein Name</div>
-    <div class="l4-links"><a href="#">Portfolio</a><a href="#">About</a><a href="#">CV</a><a href="#">Contact</a></div>
+    <div class="l4-links">
+      <a href="#l4-work">Portfolio</a>
+      <a href="#l4-about">About</a>
+      <a href="#l4-cv">CV</a>
+      <a href="#l4-contact">Contact</a>
+    </div>
   </nav>
+
+  <!-- Hero -->
   <div class="l4-hero">
     <div class="l4-hero-left">
       <div class="l4-label">Freie Kunst | Portfolio</div>
       <h1><strong>Malerei</strong> und Installation an der Schnittstelle von Material und Raum.</h1>
       <p>Studium der Freien Kunst. Arbeiten in Malerei, Mixed Media und raumbezogener Installation.</p>
-      <a href="#" class="l4-outline-btn">Portfolio ansehen</a>
+      <a href="#l4-work" class="l4-outline-btn">Portfolio ansehen</a>
     </div>
     <div class="l4-hero-grid">
       <div class="cell"><img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=450&h=450&fit=crop&q=80" alt="" loading="lazy"></div>
@@ -653,21 +1202,84 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
       <div class="cell"><img src="https://images.unsplash.com/photo-1501472312651-726afe119ff1?w=450&h=450&fit=crop&q=80" alt="" loading="lazy"></div>
     </div>
   </div>
-  <div class="l4-stats">
+
+  <!-- Stats -->
+  <div class="l4-stats reveal">
     <div class="l4-stat"><div class="num">24</div><div class="txt">Werke</div></div>
     <div class="l4-stat"><div class="num">6</div><div class="txt">Ausstellungen</div></div>
     <div class="l4-stat"><div class="num">3</div><div class="txt">Stipendien</div></div>
     <div class="l4-stat"><div class="num">1</div><div class="txt">Preis</div></div>
   </div>
-  <div class="l4-work">
-    <div class="l4-work-head"><h2>Ausgewählte Arbeiten</h2><span>2022 - 2026</span></div>
-    <div class="l4-work-grid">
-      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Fragmente</h4><p>Öl auf Leinwand</p></div></div>
-      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Reflexionen</h4><p>Mixed Media</p></div></div>
-      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Lichtstudie</h4><p>Aquarell</p></div></div>
-      <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Horizont</h4><p>Mischtechnik</p></div></div>
+
+  <!-- Portfolio -->
+  <div id="l4-work">
+    <div class="l4-work reveal">
+      <div class="l4-work-head"><h2>Ausgewaehlte Arbeiten</h2><span>2022 - 2026</span></div>
+      <div class="l4-work-grid">
+        <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Fragmente</h4><p>Oel auf Leinwand</p></div></div>
+        <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Reflexionen</h4><p>Mixed Media</p></div></div>
+        <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Lichtstudie</h4><p>Aquarell</p></div></div>
+        <div class="l4-work-cell"><img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=450&h=600&fit=crop&q=80" alt="" loading="lazy"><div class="l4-work-overlay"><h4>Horizont</h4><p>Mischtechnik</p></div></div>
+      </div>
     </div>
   </div>
+
+  <!-- About -->
+  <div id="l4-about">
+    <div class="l4-about reveal">
+      <div class="l4-about-img reveal-left">
+        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=500&fit=crop&q=80" alt="Studio" loading="lazy">
+      </div>
+      <div class="l4-about-text reveal-right">
+        <div class="l4-label">About</div>
+        <h3>Reduktion als kuenstlerisches Prinzip.</h3>
+        <p>Meine Arbeit sucht die Essenz - das, was uebrig bleibt, wenn alles Ueberfluessige wegfaellt. In der Spannung zwischen Linie und Flaeche, zwischen Fuelle und Leere finde ich meinen Ausdruck.</p>
+        <blockquote>Weniger zeigen, mehr sagen.</blockquote>
+      </div>
+    </div>
+  </div>
+
+  <!-- CV -->
+  <div id="l4-cv">
+    <div class="l4-cv reveal">
+      <div class="l4-cv-head"><h2>Curriculum Vitae</h2></div>
+      <div class="l4-cv-table">
+        <div class="l4-cv-row"><div class="year">2026</div><div class="info"><strong>Einzelausstellung "Zwischenraeume"</strong> - Galerie am Markt</div></div>
+        <div class="l4-cv-row"><div class="year">2025</div><div class="info"><strong>Gruppenausstellung "Neue Positionen"</strong> - Kunstverein</div></div>
+        <div class="l4-cv-row"><div class="year">2025</div><div class="info"><strong>Arbeitsstipendium</strong> - Kunststiftung, Foerderprogramm</div></div>
+        <div class="l4-cv-row"><div class="year">2024</div><div class="info"><strong>Semesterausstellung</strong> - Jahresrundgang</div></div>
+        <div class="l4-cv-row"><div class="year">2023</div><div class="info"><strong>Workshop Experimentelle Druckgrafik</strong> - Sommerakademie</div></div>
+        <div class="l4-cv-row"><div class="year">2022</div><div class="info"><strong>Beginn Studium Freie Kunst</strong> - Schwerpunkt Malerei</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div id="l4-contact">
+    <div class="l4-contact reveal">
+      <div class="l4-contact-left">
+        <div class="l4-label">Contact</div>
+        <h2>Get in touch.</h2>
+        <form class="l4-form" onsubmit="event.preventDefault()">
+          <input type="text" placeholder="Name">
+          <input type="email" placeholder="Email">
+          <textarea placeholder="Message"></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+      <div class="l4-contact-right">
+        <div class="l4-label">Info</div>
+        <p>
+          deinname@email.de<br>
+          Instagram<br>
+          Behance<br><br>
+          Freie Kunst<br>
+          Portfolio 2022 - 2026
+        </p>
+      </div>
+    </div>
+  </div>
+
   <footer class="l4-footer"><span>2026 Dein Name</span><span>Impressum / Datenschutz</span></footer>
 </div>
 
@@ -678,8 +1290,15 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
 <div class="layout l5" id="l5">
   <nav class="l5-nav">
     <div class="l5-logo">Dein Name</div>
-    <div class="l5-links"><a href="#">Portfolio</a><a href="#">Über mich</a><a href="#">Ausstellungen</a><a href="#">Kontakt</a></div>
+    <div class="l5-links">
+      <a href="#l5-gallery">Portfolio</a>
+      <a href="#l5-about">Ueber mich</a>
+      <a href="#l5-vita">Vita</a>
+      <a href="#l5-contact">Kontakt</a>
+    </div>
   </nav>
+
+  <!-- Hero -->
   <div class="l5-hero">
     <div class="l5-hero-bg">
       <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=1400&h=800&fit=crop&q=80" alt="" loading="lazy">
@@ -687,40 +1306,324 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
     <div class="l5-hero-content">
       <div class="kicker">Portfolio 2022 - 2026</div>
       <h1>Zwischen<br><em>Licht</em> und<br>Materie.</h1>
-      <p>Arbeiten in Malerei, Installation und digitaler Kunst. Studium der Freien Kunst.</p>
-      <a href="#" class="l5-gold-btn">Portfolio entdecken</a>
+      <p>Arbeiten in Malerei, Installation und digitaler Kunst. Studium der Freien Kunst. Dramatisch, tiefgruendig, atmosphaerisch.</p>
+      <a href="#l5-gallery" class="l5-gold-btn">Portfolio entdecken</a>
     </div>
   </div>
-  <div class="l5-gallery">
-    <div class="l5-gal-item">
-      <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l5-gal-over"><h4>Fragmente</h4><p>Öl auf Leinwand</p></div>
-    </div>
-    <div class="l5-gal-item">
-      <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l5-gal-over"><h4>Lichtstudie III</h4><p>Aquarell</p></div>
-    </div>
-    <div class="l5-gal-item">
-      <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l5-gal-over"><h4>Abstraktion</h4><p>Acryl &amp; Mixed Media</p></div>
-    </div>
-    <div class="l5-gal-item">
-      <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
-      <div class="l5-gal-over"><h4>Horizont</h4><p>Mischtechnik</p></div>
-    </div>
-  </div>
-  <div class="l5-about">
-    <div class="l5-about-img">
-      <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop&q=80" alt="" loading="lazy">
-    </div>
-    <div class="l5-about-text">
-      <div class="kicker">Über die Künstlerin</div>
-      <h3>Kunst als Prozess des Verstehens.</h3>
-      <p>Arbeiten in Malerei, Installation und digitaler Kunst.</p>
-      <blockquote>„Kunst ist für mich kein Produkt, sondern ein Prozess des Verstehens."</blockquote>
+
+  <!-- Gallery -->
+  <div id="l5-gallery">
+    <div class="l5-gallery">
+      <div class="l5-gal-item reveal-scale">
+        <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+        <div class="l5-gal-over"><h4>Fragmente</h4><p>Oel auf Leinwand</p></div>
+      </div>
+      <div class="l5-gal-item reveal-scale">
+        <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+        <div class="l5-gal-over"><h4>Lichtstudie III</h4><p>Aquarell</p></div>
+      </div>
+      <div class="l5-gal-item reveal-scale">
+        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+        <div class="l5-gal-over"><h4>Abstraktion</h4><p>Acryl &amp; Mixed Media</p></div>
+      </div>
+      <div class="l5-gal-item reveal-scale">
+        <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=500&h=660&fit=crop&q=80" alt="" loading="lazy">
+        <div class="l5-gal-over"><h4>Horizont</h4><p>Mischtechnik</p></div>
+      </div>
     </div>
   </div>
+
+  <!-- Ueber mich -->
+  <div id="l5-about">
+    <div class="l5-about reveal">
+      <div class="l5-about-img reveal-left">
+        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop&q=80" alt="" loading="lazy">
+      </div>
+      <div class="l5-about-text reveal-right">
+        <div class="kicker">Ueber mich</div>
+        <h3>Kunst als Prozess des Verstehens.</h3>
+        <p>Meine Arbeit bewegt sich zwischen Malerei, Installation und digitaler Kunst. Im Atelier suche ich den Moment, in dem das Material zu sprechen beginnt - wenn die Farbe eine eigene Geschichte erzaehlt, unabhaengig von meiner Intention.</p>
+        <blockquote>Kunst ist fuer mich kein Produkt, sondern ein Prozess des Verstehens.</blockquote>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vita -->
+  <div id="l5-vita">
+    <div class="l5-vita reveal">
+      <div class="l5-vita-head"><div class="kicker">Lebenslauf</div><h2>Vita</h2></div>
+      <div class="l5-vita-grid">
+        <div class="l5-vita-card reveal">
+          <div class="year">2026</div>
+          <h4>Einzelausstellung "Zwischenraeume"</h4>
+          <p>Galerie am Markt, 3 Positionen</p>
+        </div>
+        <div class="l5-vita-card reveal">
+          <div class="year">2025</div>
+          <h4>Gruppenausstellung "Neue Positionen"</h4>
+          <p>Kunstverein</p>
+        </div>
+        <div class="l5-vita-card reveal">
+          <div class="year">2025</div>
+          <h4>Arbeitsstipendium</h4>
+          <p>Kunststiftung, Foerderprogramm</p>
+        </div>
+        <div class="l5-vita-card reveal">
+          <div class="year">2024</div>
+          <h4>Semesterausstellung</h4>
+          <p>Jahresrundgang</p>
+        </div>
+        <div class="l5-vita-card reveal">
+          <div class="year">2023</div>
+          <h4>Workshop Experimentelle Druckgrafik</h4>
+          <p>Sommerakademie</p>
+        </div>
+        <div class="l5-vita-card reveal">
+          <div class="year">2022</div>
+          <h4>Beginn Studium Freie Kunst</h4>
+          <p>Schwerpunkt Malerei &amp; Installation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kontakt -->
+  <div id="l5-contact">
+    <div class="l5-contact reveal">
+      <div class="l5-contact-left">
+        <div class="kicker">Schreib mir</div>
+        <h2>Kontakt</h2>
+        <form class="l5-form" onsubmit="event.preventDefault()">
+          <input type="text" placeholder="Dein Name">
+          <input type="email" placeholder="Deine E-Mail">
+          <textarea placeholder="Deine Nachricht..."></textarea>
+          <button type="submit">Nachricht senden</button>
+        </form>
+      </div>
+      <div class="l5-contact-right">
+        <div class="kicker">Direkt erreichen</div>
+        <p>
+          <a href="mailto:deinname@email.de">deinname@email.de</a><br>
+          <a href="#">Instagram</a><br>
+          <a href="#">Behance</a><br><br>
+          Freie Kunst<br>
+          Portfolio 2022 - 2026
+        </p>
+      </div>
+    </div>
+  </div>
+
   <footer class="l5-footer"><span>2026 Dein Name</span><span>Impressum / Datenschutz</span></footer>
+</div>
+
+
+<!-- ============================================================
+     ADMIN CMS PREVIEW
+     ============================================================ -->
+<div class="layout l-admin" id="ladmin">
+
+  <div class="adm-intro reveal">
+    <h1>Das <strong>Admin CMS</strong> im Ueberblick</h1>
+    <p>So sieht das Content-Management-System von innen aus. Dunkel, uebersichtlich, einfach zu bedienen - auch ohne Programmierkenntnisse. Klick durch die drei Ansichten.</p>
+  </div>
+
+  <div class="adm-tabs">
+    <button class="adm-tab active" data-view="adm-dashboard">Dashboard</button>
+    <button class="adm-tab" data-view="adm-pages">Seiten bearbeiten</button>
+    <button class="adm-tab" data-view="adm-gallery">Galerie verwalten</button>
+  </div>
+
+  <!-- Dashboard View -->
+  <div class="adm-screen active" id="adm-dashboard">
+    <div class="adm-mockup">
+      <div class="adm-mock-bar">
+        <div class="adm-mock-dot r"></div>
+        <div class="adm-mock-dot y"></div>
+        <div class="adm-mock-dot g"></div>
+        <span>localhost/admin/dashboard.php</span>
+      </div>
+      <div class="adm-mock-layout">
+        <aside class="adm-mock-sidebar">
+          <div class="adm-mock-sidebar-logo">CMS Admin</div>
+          <nav class="adm-mock-nav">
+            <a class="act">Dashboard</a>
+            <a>Seiten</a>
+            <a>Galerie</a>
+            <a>Einstellungen</a>
+            <a>Abmelden</a>
+          </nav>
+        </aside>
+        <div class="adm-mock-main">
+          <div class="adm-mock-topbar">
+            <h3>Dashboard</h3>
+            <div class="badge">02.03.2026, 14:30 Uhr</div>
+          </div>
+          <div class="adm-stats-row">
+            <div class="adm-stat-card">
+              <div class="val">12</div>
+              <div class="lbl">Galerie-Bilder</div>
+            </div>
+            <div class="adm-stat-card">
+              <div class="val">4</div>
+              <div class="lbl">Seiten</div>
+            </div>
+            <div class="adm-stat-card">
+              <div class="val">#c4a882</div>
+              <div class="lbl">Akzentfarbe</div>
+            </div>
+            <div class="adm-stat-card">
+              <div class="val">DM Sans</div>
+              <div class="lbl">Schriftart</div>
+            </div>
+          </div>
+          <div class="adm-activity">
+            <h4>Letzte Aktivitaeten</h4>
+            <div class="adm-activity-item"><span>Startseite aktualisiert</span><span class="time">vor 2 Stunden</span></div>
+            <div class="adm-activity-item"><span>Neues Galerie-Bild hochgeladen</span><span class="time">vor 5 Stunden</span></div>
+            <div class="adm-activity-item"><span>Ueber-mich Seite bearbeitet</span><span class="time">gestern</span></div>
+            <div class="adm-activity-item"><span>Akzentfarbe geaendert</span><span class="time">vor 3 Tagen</span></div>
+            <div class="adm-activity-item"><span>Kontaktdaten aktualisiert</span><span class="time">letzte Woche</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pages Editor View -->
+  <div class="adm-screen" id="adm-pages">
+    <div class="adm-mockup">
+      <div class="adm-mock-bar">
+        <div class="adm-mock-dot r"></div>
+        <div class="adm-mock-dot y"></div>
+        <div class="adm-mock-dot g"></div>
+        <span>localhost/admin/pages.php?page=about</span>
+      </div>
+      <div class="adm-mock-layout">
+        <aside class="adm-mock-sidebar">
+          <div class="adm-mock-sidebar-logo">CMS Admin</div>
+          <nav class="adm-mock-nav">
+            <a>Dashboard</a>
+            <a class="act">Seiten</a>
+            <a>Galerie</a>
+            <a>Einstellungen</a>
+            <a>Abmelden</a>
+          </nav>
+        </aside>
+        <div class="adm-mock-main">
+          <div class="adm-mock-topbar">
+            <h3>Seite bearbeiten: Ueber mich</h3>
+            <div class="badge">about.json</div>
+          </div>
+          <div class="adm-editor-mock">
+            <div class="adm-editor-main">
+              <span class="adm-editor-label">Seitentitel</span>
+              <input class="adm-editor-input" value="Ueber mich" readonly>
+              <span class="adm-editor-label">Inhalt (HTML)</span>
+              <textarea class="adm-editor-textarea" readonly>&lt;h3&gt;Ueber mich&lt;/h3&gt;
+&lt;p&gt;Ich studiere Freie Kunst und
+arbeite interdisziplinaer mit
+Pigmenten, Textilien und
+digitalen Medien.&lt;/p&gt;
+&lt;p&gt;Im Zentrum meiner Arbeit steht
+die kuenstlerische Auseinandersetzung
+mit Raum und Materialitaet.&lt;/p&gt;</textarea>
+              <button class="adm-editor-btn" style="margin-top:1rem">Speichern</button>
+            </div>
+            <div class="adm-editor-sidebar">
+              <div class="adm-editor-card">
+                <h4>Seitenbild</h4>
+                <div class="adm-editor-img-placeholder">Bild waehlen...</div>
+              </div>
+              <div class="adm-editor-card">
+                <h4>Vita / CV</h4>
+                <p style="font-size:.65rem;color:rgba(255,255,255,.3);line-height:1.6">
+                  2026 - Einzelausstellung<br>
+                  2025 - Gruppenausstellung<br>
+                  2025 - Stipendium<br>
+                  2024 - Semesterausstellung
+                </p>
+                <button class="adm-editor-btn">CV bearbeiten</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery View -->
+  <div class="adm-screen" id="adm-gallery">
+    <div class="adm-mockup">
+      <div class="adm-mock-bar">
+        <div class="adm-mock-dot r"></div>
+        <div class="adm-mock-dot y"></div>
+        <div class="adm-mock-dot g"></div>
+        <span>localhost/admin/gallery.php</span>
+      </div>
+      <div class="adm-mock-layout">
+        <aside class="adm-mock-sidebar">
+          <div class="adm-mock-sidebar-logo">CMS Admin</div>
+          <nav class="adm-mock-nav">
+            <a>Dashboard</a>
+            <a>Seiten</a>
+            <a class="act">Galerie</a>
+            <a>Einstellungen</a>
+            <a>Abmelden</a>
+          </nav>
+        </aside>
+        <div class="adm-mock-main">
+          <div class="adm-gal-toolbar">
+            <h3>Galerie verwalten</h3>
+            <div class="adm-gal-upload-btn">+ Bild hochladen</div>
+          </div>
+          <div class="adm-gal-grid">
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Fragmente der Stille</h5><p>Oel auf Leinwand, 2024</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Urbane Reflexionen</h5><p>Acryl, Mixed Media, 2025</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Lichtstudie III</h5><p>Aquarell, 2025</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Horizont</h5><p>Mischtechnik, 2026</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Materie</h5><p>Skulptur, 2024</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Abstraktion IX</h5><p>Oel auf Leinwand, 2026</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1482160549825-59d1b23cb208?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Farbexplosion</h5><p>Acryl, 2025</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+            <div class="adm-gal-card">
+              <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=300&h=300&fit=crop&q=80" alt="" loading="lazy">
+              <div class="adm-gal-card-info"><h5>Textur</h5><p>Mischtechnik, 2026</p></div>
+              <div class="adm-gal-card-actions"><button class="edit-btn">Bearbeiten</button><button class="del-btn">Loeschen</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="adm-footer-note">Dies ist ein Vorschau-Mockup. Das echte Admin-Panel laeuft auf deinem eigenen Server.</div>
 </div>
 
 
@@ -728,7 +1631,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
      CTA BAR
      ============================================================ -->
 <div class="cta-bar" id="ctaBar">
-  <p><strong>Kunst-Website CMS</strong> - Open Source, PHP, ohne Datenbank. Perfekt für Anfänger.</p>
+  <p><strong>Kunst-Website CMS</strong> - Open Source, PHP, ohne Datenbank. Perfekt fuer Anfaenger.</p>
   <a href="https://github.com/crorry-dev/example_website_with_cms" target="_blank">Auf GitHub ansehen</a>
   <button class="cta-close" id="ctaClose" aria-label="Schliessen">x</button>
 </div>
@@ -738,7 +1641,7 @@ button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
      JAVASCRIPT
      ============================================================ -->
 <script>
-// Layout switcher
+// === Layout Switcher ===
 const layouts = document.querySelectorAll('.layout');
 const btns = document.querySelectorAll('.sw-btn');
 const switcher = document.getElementById('switcher');
@@ -750,25 +1653,67 @@ btns.forEach(btn => {
     btn.classList.add('active');
     layouts.forEach(l => l.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    // Dark switcher for dark layout
-    switcher.classList.toggle('dark', id === 'l5');
+    // Dark switcher for dark layout or admin
+    switcher.classList.toggle('dark', id === 'l5' || id === 'ladmin');
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'instant' });
+    // Re-observe reveal elements for new layout
+    observeReveals();
   });
 });
 
-// CTA bar - show after 3s
+// === Scroll Reveal (IntersectionObserver) ===
+function observeReveals() {
+  const reveals = document.querySelectorAll('.layout.active .reveal, .layout.active .reveal-left, .layout.active .reveal-right, .layout.active .reveal-scale');
+  reveals.forEach(el => {
+    el.classList.remove('visible');
+    revealObserver.observe(el);
+  });
+}
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+// Initial observe
+observeReveals();
+
+// === Smooth in-page navigation ===
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// === CTA bar ===
 setTimeout(() => document.getElementById('ctaBar').classList.add('show'), 3000);
 document.getElementById('ctaClose').addEventListener('click', () => {
   document.getElementById('ctaBar').classList.remove('show');
 });
 
-// Keyboard navigation (1-5)
+// === Keyboard navigation (1-6) ===
 document.addEventListener('keydown', e => {
   const n = parseInt(e.key);
-  if (n >= 1 && n <= 5) {
+  if (n >= 1 && n <= 6 && btns[n - 1]) {
     btns[n - 1].click();
   }
+});
+
+// === Admin CMS Tab Switching ===
+document.querySelectorAll('.adm-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.adm-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.adm-screen').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.view).classList.add('active');
+  });
 });
 </script>
 </body>
