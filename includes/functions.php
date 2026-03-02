@@ -88,7 +88,7 @@ function get_settings(): array {
         'custom_font'     => '',       // Name der hochgeladenen Schriftart
         'custom_font_url' => '',       // Pfad zur hochgeladenen Schriftart
         'admin_password'  => password_hash('admin123', PASSWORD_DEFAULT),
-        'footer_text'     => '© 2024 Meine Kunstseite',
+        'footer_text'     => '2026 Meine Kunstseite',
         'social_instagram'=> '',
         'social_facebook' => '',
         'social_twitter'  => '',

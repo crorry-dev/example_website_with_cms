@@ -256,7 +256,7 @@ $gallery  = get_gallery();
 
         <div class="form-group">
             <label for="editMedium">Technik / Medium</label>
-            <input type="text" id="editMedium" placeholder="z.B. Acryl auf Leinwand, 2024">
+            <input type="text" id="editMedium" placeholder="z.B. Acryl auf Leinwand, 2026">
         </div>
 
         <div class="form-group">

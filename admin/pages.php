@@ -230,7 +230,7 @@ $contactPage = get_page('contact');
                         <label>Vita / CV (optional)</label>
                         <p class="form-help" style="margin-bottom: 1rem">
                             Gib jeden Eintrag als JSON-Array ein. Beispiel ist bereits vorausgefüllt.
-                            Format: [{"year":"2024","text":"Ausstellung..."}]
+                            Format: [{"year":"2026","text":"Ausstellung..."}]
                         </p>
                         <textarea name="cv" style="height: 150px; font-family: monospace; font-size: 0.82rem"><?= escape(json_encode($aboutPage['cv'] ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) ?></textarea>
                     </div>

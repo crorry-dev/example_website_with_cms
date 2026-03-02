@@ -74,7 +74,7 @@ if (!isset($settings)) {
         <div class="site-footer__bottom">
             <p><?= escape($settings['footer_text']) ?></p>
             <!-- Kleiner Hinweis auf das CMS – kannst du entfernen -->
-            <p><small><a href="/admin/" class="admin-link">✦ Verwalten</a></small></p>
+            <p><small><a href="/admin/" class="admin-link">Verwalten</a></small></p>
         </div>
     </div>
 </footer>

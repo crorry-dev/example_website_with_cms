@@ -76,7 +76,7 @@ $settings = get_settings();
                         <label for="site_tagline">Tagline / Kurzbeschreibung</label>
                         <input type="text" id="site_tagline" name="site_tagline"
                                value="<?= escape($settings['site_tagline']) ?>"
-                               placeholder="z.B. Malerei, Fotografie, Weimar">
+                               placeholder="z.B. Malerei, Fotografie, Installation">
                         <p class="form-help">Kurzer Beschreibungssatz für Suchmaschinen</p>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ $settings = get_settings();
                     <label for="footer_text">Footer-Text</label>
                     <input type="text" id="footer_text" name="footer_text"
                            value="<?= escape($settings['footer_text']) ?>"
-                           placeholder="© 2024 Mein Name. Alle Rechte vorbehalten.">
+                           placeholder="2026 Dein Name. Alle Rechte vorbehalten.">
                 </div>
 
                 <button type="submit" class="btn btn--primary">💾 Speichern</button>
