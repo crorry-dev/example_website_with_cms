@@ -3,10 +3,9 @@
 **Ein einfaches, elegantes Content-Management-System für deine Kunst-Webseite.**
 
 Gebaut für: Kunststudierende ohne viele Programmierkenntnisse  
-Inspiriert von: [lileweimar.de](https://lileweimar.de)  
 Technologien: HTML, CSS, JavaScript, PHP (kein WordPress, keine Datenbank nötig!)
 
-> 🌐 **[Live-Demo ansehen](https://tobiascronauer.github.io/example_website_with_cms/)** – So sieht die fertige Website aus!
+> Live-Demo: Klone das Repo und starte es lokal, um die Website auszuprobieren!
 
 ---
 
@@ -511,8 +510,8 @@ Normalerweise nutzen Websites eine **Datenbank** (wie MySQL). Dieses CMS macht e
 **Beispiel: `content/settings.json`:**
 ```json
 {
-    "site_name": "Lena Müller",
-    "site_tagline": "Malerei & Illustration",
+    "site_name": "Dein Name",
+    "site_tagline": "Deine Kunstrichtung",
     "accent_color": "#c4a882",
     "bg_color": "#f5f0eb",
     "text_color": "#1a1a1a"
